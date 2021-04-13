@@ -6,11 +6,13 @@ module.exports = {
     extend: {
       colors: {
         rose: colors.rose
-      }
+      },
     },
   },
   variants: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/forms')
+  ],
 }
