@@ -2,6 +2,8 @@ const express = require('express')
 const mongoose = require('mongoose')
 const bodyParse = require('body-parser')
 
+const bedah = require('./routes/api/bedah')
+
 const app = express()
 
 // body-parser middleware
@@ -19,6 +21,9 @@ mongoose
   })
   .then(() => console.log('MongoDB Connected...'))
   .catch((err) => console.log(err))
+
+// Use Routes
+app.use('/api/bedah', bedah)
 
 
 const port = process.env.PORT || 5000
