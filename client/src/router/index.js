@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import About from '../pages/About'
+import BedahAdmin from '../pages/admin/BedahAdmin'
 import Bedah from '../pages/Bedah'
 import Grooming from '../pages/Grooming'
 import Home from '../pages/Home'
@@ -39,6 +40,13 @@ const Router = () => {
           <Navbar />
           <About />
         </Route>
+
+
+        <Route exact path='/admin'>
+          <BedahAdmin />
+          
+        </Route>
+
         
       </Switch>
     </BrowserRouter>
