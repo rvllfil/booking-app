@@ -1,15 +1,13 @@
 import { useState } from "react"
 import { connect } from "react-redux"
 import { addBedah } from "./../redux/bedah/bedahActions"
-import { v1 as uuid } from 'uuid'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 function Bedah({addBedah}) {
-
   const [data, setData] = useState({
-    id: uuid(),
     hari: 'Senin',
-    waktu: '05:00-07:00'
+    waktu: '05:00-07:00',
+    status: 'diajukan'
   })
   
   const onChange = (e) => {
@@ -19,17 +17,25 @@ function Bedah({addBedah}) {
     })
   }
 
+  const history = useHistory()
+
   const onSubmit = (e) => {
     e.preventDefault()
-    addBedah(data)
-    console.log(data)
-    setData({
-      id: uuid(),
-      jenis_hewan: '',
-      keluhan: '',
-      hari: 'Senin',
-      waktu: '05:00-07:00'
-    })
+    try {
+      addBedah(data)
+      setData({
+        jenis_hewan: '',
+        keluhan: '',
+        hari: 'Senin',
+        waktu: '05:00-07:00',
+        status: 'diajukan'
+      })
+      alert('Berhasil!')
+      history.push('/home')
+    } catch(err) {
+      alert(err.message)
+    }
+    
   }
 
   return (

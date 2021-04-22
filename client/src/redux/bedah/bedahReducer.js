@@ -1,15 +1,8 @@
-import { ADD_BEDAH, GET_BEDAH } from './bedahTypes'
-import { v1 as uuid } from 'uuid'
+import { ADD_BEDAH, GET_BEDAH, BEDAH_LOADING } from './bedahTypes'
 
 const initialState = {
-  bedah : [{
-    id: uuid(),
-    jenis_hewan: 'kucing',
-    keluhan: 'batuk',
-    hari: 'senin',
-    waktu: '05:00-07:00',
-    status: 'diajukan'
-  }]
+  bedah : [],
+  loading: false
 }
 
 
@@ -18,11 +11,18 @@ const bedahReducer = (state = initialState, action) => {
     case GET_BEDAH: 
       return {
         ...state,
+        bedah: action.payload,
+        loading: false
     }
     case ADD_BEDAH:
       return{
         ...state,
         bedah: [action.payload, ...state.bedah]
+      }
+    case BEDAH_LOADING:
+      return {
+        ...state,
+        loading: true
       }
     default:
       return state

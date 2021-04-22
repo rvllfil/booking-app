@@ -9,12 +9,16 @@ const Bedah = require('../../models/Bedah')
 // @access  Public
 router.get('/', async (req, res) => {
   try {
-    const bedah = await Bedah.find().sort({booked_at: -1})
+    const bedah = await Bedah.find().sort({
+      booked_at: -1
+    })
     if (!bedah) throw Error('Data Bedah tidak ditemukan')
     res.status(200).json(bedah)
 
   } catch (e) {
-    res.status(400).json({msg: e.message})
+    res.status(400).json({
+      msg: e.message
+    })
   }
 })
 
@@ -29,13 +33,15 @@ router.post('/', async (req, res) => {
     waktu: req.body.waktu,
     status: req.body.status,
   })
-  
+
   try {
     const bedah = await newBedah.save()
-    if(!bedah) throw Error('Terjadi Kesalahan ketika menyimpan Data Bedah')
+    if (!bedah) throw Error('Terjadi Kesalahan ketika menyimpan Data Bedah')
     res.status(200).json(bedah)
-  } catch(e) {
-    res.status(400).json({msg: e.message})
+  } catch (e) {
+    res.status(400).json({
+      msg: e.message
+    })
   }
 })
 
@@ -44,11 +50,33 @@ router.post('/', async (req, res) => {
 // @access  Public
 router.put('/:id', async (req, res) => {
   try {
-    const bedah = await Bedah.findByIdAndUpdate(req.params.id, req.body, { new: true })
-    if(!bedah) throw Error('Terjadi Kesalahan ketika mengubah Data Bedah')
+    const bedah = await Bedah.findByIdAndUpdate(req.params.id, req.body, {
+      new: true
+    })
+    if (!bedah) throw Error('Terjadi Kesalahan ketika mengubah Data Bedah')
     res.status(200).json(bedah)
-  } catch(e) {
-    res.status(400).json({ msg: e.message })
+  } catch (e) {
+    res.status(400).json({
+      msg: e.message
+    })
+  }
+})
+
+// @route   DELETE api/bedah
+// @desc    delete Bedah
+// @access  Public
+router.delete('/:id', async (req, res) => {
+  try {
+    const bedah = await Bedah.findById(req.params.id)
+    if (!bedah) throw Error('Data Bedah Tidak Ditemukan')
+    const removed = await bedah.remove()
+    if (!removed)
+      throw Error('Terjadi Kesalahan ketika menghapus Data Bedah')
+    res.status(200).json(bedah)
+  } catch (e) {
+    res.status(400).json({
+      msg: e.message
+    })
   }
 })
 
