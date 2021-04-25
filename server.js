@@ -1,16 +1,14 @@
 const express = require('express')
 const mongoose = require('mongoose')
-const bodyParse = require('body-parser')
-
-const bedah = require('./routes/api/bedah')
+const config = require('config')
 
 const app = express()
 
 // body-parser middleware
-app.use(bodyParse.json())
+app.use(express.json())
 
 // DB config
-const db = require('./config/keys').mongoURI
+const db = config.get("mongoURI")
 
 // Connect to Mongo
 mongoose
@@ -23,7 +21,9 @@ mongoose
   .catch((err) => console.log(err))
 
 // Use Routes
-app.use('/api/bedah', bedah)
+app.use('/api/bedah', require('./routes/api/bedah'))
+app.use('/api/users', require('./routes/api/users'))
+app.use('/api/auth', require('./routes/api/auth'))
 
 
 const port = process.env.PORT || 5000

@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const auth = require('../../middleware/auth')
 
 // Bedah Model
 const Bedah = require('../../models/Bedah')
@@ -23,9 +24,9 @@ router.get('/', async (req, res) => {
 })
 
 // @route   POST api/bedah
-// @desc    Create Bedah
-// @access  Public
-router.post('/', async (req, res) => {
+// @desc    Create Booking Bedah
+// @access  Private
+router.post('/', auth, async (req, res) => {
   const newBedah = new Bedah({
     jenis_hewan: req.body.jenis_hewan,
     keluhan: req.body.keluhan,
@@ -46,7 +47,7 @@ router.post('/', async (req, res) => {
 })
 
 // @route   PUT api/bedah
-// @desc    Update Bedah
+// @desc    Update Booking Bedah
 // @access  Public
 router.put('/:id', async (req, res) => {
   try {
