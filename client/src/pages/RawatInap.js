@@ -1,6 +1,9 @@
+import Navbar from "../components/Navbar"
+
 function RawatInap() {
   return (
     <>
+      <Navbar backButton={true}/>
       <div className="max-w-md py-1 bg-white shadow-lg rounded-lg mx-5 my-4">
         <h4 className='mt-3 mb-3 text-2xl text-center'>Rawat Inap</h4>
       </div>

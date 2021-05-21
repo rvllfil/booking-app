@@ -2,7 +2,7 @@ import { GET_BEDAH, BEDAH_LOADING, ADD_BEDAH  } from './bedahTypes'
 import axios from 'axios'
 
 export const getBedah = () => dispatch => {
-  dispatch(setBedahLoading)
+  dispatch(setBedahLoading())
   axios
     .get('/api/bedah')
     .then(res =>

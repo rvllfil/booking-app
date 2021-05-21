@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import Navbar from '../components/Navbar'
 import ig from '../icons/instagram.svg'
 import wa from '../icons/whatsapp.svg'
 
@@ -7,6 +8,7 @@ import wa from '../icons/whatsapp.svg'
 function About() {
   return (
     <div>
+      <Navbar />
       <div className="max-w-md py-1 bg-white shadow-lg rounded-lg mx-5 my-4">
         <h4 className='text-pink-500 mt-3 mb-3 text-2xl text-center'>Tentang Kami</h4>
         <div className='px-3 text-lg text'>

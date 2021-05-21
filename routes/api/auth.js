@@ -16,7 +16,7 @@ router.post('/', (req, res) => {
 
   // Simple Validation
   if(!email || !password) {
-    return res.status(400).json({msg: 'Harap Masukan Semua Data'})
+    return res.status(400).json({msg: 'Harap masukan email dan password'})
   }
 
   // Check for existing user
@@ -31,8 +31,7 @@ router.post('/', (req, res) => {
         
           jwt.sign(
             { id: user.id },
-            config.get('jwtSecret'),
-            { expiresIn: 3600 },
+            config.get('jwtSecret'),            
             (err, token) => {
               if(err) throw err
               res.json({

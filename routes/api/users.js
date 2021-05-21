@@ -21,7 +21,7 @@ router.post('/', (req, res) => {
   // Check for existing user
   User.findOne({ email })
     .then(user => {
-      if(user) return res.status(400).json({msg: 'Pengguna sudah ada'})
+      if(user) return res.status(400).json({msg: '*Alamat email pengguna telah digunakan'})
       
       const newUser = new User({
         nama,
@@ -38,23 +38,14 @@ router.post('/', (req, res) => {
           newUser.password = hash
           newUser.save()
             .then(user => {
-
-              jwt.sign(
-                { id: user.id },
-                config.get('jwtSecret'),
-                { expiresIn: 3600 },
-                (err, token) => {
-                  if(err) throw err
-                  res.json({
-                    token,
-                    user: { 
-                      id: user.id,
-                      nama: user.nama,
-                      email: user.email,
-                    }
-                  })
+              res.json({
+                token,
+                user: { 
+                  id: user.id,
+                  nama: user.nama,
+                  email: user.email,
                 }
-              )
+              })
             })
         })
       })
@@ -62,5 +53,39 @@ router.post('/', (req, res) => {
     })
 })
 
+
+// @route   GET api/users
+// @desc    Get All User
+// @access  Public
+router.get('/', async (req, res) => {
+  try {
+    const users = await User.find()
+    if (!users) throw Error('Data User tidak ditemukan')
+    res.status(200).json(users)
+
+  } catch (e) {
+    res.status(400).json({
+      msg: e.message
+    })
+  }
+})
+
+// @route   DELETE api/users
+// @desc    delete Users
+// @access  Public
+router.delete('/:id', async (req, res) => {
+  try {
+    const users = await User.findById(req.params.id)
+    if (!users) throw Error('Data Users Tidak Ditemukan')
+    const removed = await users.remove()
+    if (!removed)
+      throw Error('Terjadi Kesalahan ketika menghapus Data Users')
+    res.status(200).json(users)
+  } catch (e) {
+    res.status(400).json({
+      msg: e.message
+    })
+  }
+})
 
 module.exports = router

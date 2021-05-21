@@ -2,9 +2,11 @@ import { useState } from 'react'
 import logo from '../logo.png'
 import { Link } from 'react-router-dom'
 import './Navbar.css'
+import Logout from './Logout'
 
 function Navbar({backButton}) {
   const [toggle, setToggle] = useState(false)
+  
   return (
     <>
       <div className='bg-gradient-to-br from-rose-500 to-pink-500 top-0 w-full flex flex-wrap items-center justify-between px-5 py-3'>
@@ -31,7 +33,9 @@ function Navbar({backButton}) {
           </Link>
         )}
 
-        <img className='mr-8' src={logo} alt="Ry-VET" width="120" />
+        <Link to='/home'>
+          <img className='mr-8' src={logo} alt="Ry-VET" width="120" />
+        </Link>
         <div></div>
       </div>
 
@@ -43,7 +47,16 @@ function Navbar({backButton}) {
           <nav>
             <ul>
               <li>
+                <Link onClick={() => setToggle(!toggle)} to="/profil" className='p-4 block text-white text-xl hover:bg-rose-600'> Profil </Link>
+              </li>
+              <li>
+                <Link onClick={() => setToggle(!toggle)} to="/janji-temu" className='p-4 block text-white text-xl hover:bg-rose-600'> Janji Temu </Link>
+              </li>
+              <li>
                 <Link onClick={() => setToggle(!toggle)} to="/tentang" className='p-4 block text-white text-xl hover:bg-rose-600'> Tentang </Link>
+              </li>
+              <li>
+                <Logout sty='p-4 block text-white text-xl hover:bg-rose-600' />
               </li>
             </ul>
           </nav>

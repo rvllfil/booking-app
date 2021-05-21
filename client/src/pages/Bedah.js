@@ -2,6 +2,7 @@ import { useState } from "react"
 import { connect } from "react-redux"
 import { addBedah } from "./../redux/bedah/bedahActions"
 import { Link, useHistory } from 'react-router-dom'
+import Navbar from "../components/Navbar"
 
 function Bedah({addBedah}) {
   const [data, setData] = useState({
@@ -40,6 +41,7 @@ function Bedah({addBedah}) {
 
   return (
     <>
+      <Navbar backButton={true}/>
       <div className="max-w-md py-1 bg-white shadow-lg rounded-lg mx-5 my-4">
         <Link to='/admin'><h4 className='mt-3 mb-3 text-2xl text-center'>Bedah</h4></Link>
       </div>

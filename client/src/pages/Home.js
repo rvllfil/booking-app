@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import Navbar from '../components/Navbar'
 import menu1 from '../icons/menu-1.png'
 import menu2 from '../icons/menu-2.png'
 import menu3 from '../icons/menu-3.png'
@@ -9,6 +10,7 @@ import menu4 from '../icons/menu-4.png'
 function Home() {
   return (
     <>
+      <Navbar />
       <div className="grid grid-cols-2 gap-6 mt-10 mx-5 text-center text-lg text-white">
         <Link to='/grooming'>
         <button
