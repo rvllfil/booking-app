@@ -82,8 +82,11 @@ export const login = ({email, password}, history) => dispatch => {
       })
       dispatch(clearErrors())
       dispatch(loadUser())
-      history.push('/home')
-      
+      console.log(res.data)
+      if(res.data.user.role === 'member') {
+        history.push('/home')
+      } else if ((res.data.user.role === 'admin'))
+        history.push('/admin')
     })
     .catch(err => {
       dispatch(returnErrors(err.response.data, err.response.status, 'LOGIN_FAIL'))

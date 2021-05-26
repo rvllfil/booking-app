@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { connect } from 'react-redux'
 import { register } from '../redux/auth/authActions'
 import logo from '../logo.png'
@@ -15,16 +15,20 @@ function Register({register, error}) {
     password: '',
   })
 
-  const initErrors = {
+  const initErrors = () => { 
+    return {
     nama: '',
     no_hp: '',
     alamat: '',
     email: '',
     password: '',
     konfirmasi_password: ''
+    }
   }
 
-  const [errors, setErrors] = useState(initErrors)
+  const clear = useMemo(() => initErrors, [])
+
+  const [errors, setErrors] = useState(clear())
   const keys = Object.keys(errors)
 
   const [konfirmasi, setKonfirmasi] = useState({
@@ -127,27 +131,24 @@ function Register({register, error}) {
   const onSubmit = (e) => {
     e.preventDefault()
     if(validate()) {
-      setErrors(initErrors)
+      setErrors(clear())
       // Attempt to register
       register(data, history)
     }
   }
 
-
-  
-
   useEffect((prevProps) => {
     if (error !== prevProps) {
       // check for register error
       if (error.id === 'REGISTER_FAIL') {
-        setErrors(initErrors)
+        setErrors(clear())
         setMessage(error.msg.msg)
       } else {
         setMessage(null)
       }
     }
     
-  }, [error])
+  }, [error, clear])
 
   return (
     <>

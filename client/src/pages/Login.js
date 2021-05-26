@@ -47,7 +47,7 @@ function Login({error, login}) {
         <div className="py-12 bg-pink-100 lg:bg-white flex justify-center lg:justify-start lg:px-12">
           <div className="cursor-pointer flex items-center">
             <div>
-              <img className='' src={logo} alt="Ry-VET" width="120" />
+              <img className='' src={logo} alt="Ry-VET" width="200" />
             </div>
           </div>
         </div>

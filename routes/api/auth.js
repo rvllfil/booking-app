@@ -20,7 +20,7 @@ router.post('/', (req, res) => {
   }
 
   // Check for existing user
-  User.findOne({ email })
+  User.findOne({ email })   
     .then(user => {
       if(!user) return res.status(400).json({msg: 'User tidak ditemukan!'})
       
@@ -30,7 +30,7 @@ router.post('/', (req, res) => {
           if(!isMatch) return res.status(400).json({msg: 'Password Salah!'})
         
           jwt.sign(
-            { id: user.id },
+            { id: user.id, role: user.role },
             config.get('jwtSecret'),            
             (err, token) => {
               if(err) throw err
@@ -40,6 +40,7 @@ router.post('/', (req, res) => {
                   id: user.id,
                   nama: user.nama,
                   email: user.email,
+                  role: user.role
                 }
               })
             }

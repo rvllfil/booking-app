@@ -4,27 +4,27 @@ import PropTypes from 'prop-types'
 import { useEffect, useState } from 'react'
 import { BounceLoader } from 'react-spinners'
 
-const PrivateRoute = ({ 
+const AdminRoute = ({ 
   comp: Component,
   auth: { user, isLoading }, 
   ...rest 
 }) => {
-  const [isMember, setIsMember] = useState(true)
+  const [isAdmin, setIsAdmin] = useState(true)
   const history = useHistory()
   useEffect(() => {
     try {
-      if (!isLoading && user.role === 'member') {
-        setIsMember(true)
-      } else if (!isLoading && user.role !== 'member') {
-        setIsMember(false)
+      if (!isLoading && user.role === 'admin') {
+        setIsAdmin(true)
+      } else if (!isLoading && user.role !== 'admin') {
+        setIsAdmin(false)
       }
     } catch (e) {
-      setIsMember(false)
+      setIsAdmin(false)
     }
-    if(!isMember) {
+    if(!isAdmin) {
       history.push('/login')
     }
-  }, [user, isLoading, isMember, history])
+  }, [user, isLoading, isAdmin, history])
   return (
     <>
       { isLoading ?
@@ -34,7 +34,7 @@ const PrivateRoute = ({
         (<Route
           {...rest}
           render={props =>
-            !isLoading && !isMember ? (     
+            !isLoading && !isAdmin ? (     
             <Redirect to="/login" />
             ) : (
               <Component {...props} />
@@ -46,7 +46,7 @@ const PrivateRoute = ({
   )
 }
 
-PrivateRoute.propTypes = {
+AdminRoute.propTypes = {
   auth: PropTypes.object.isRequired
 }
 
@@ -54,4 +54,4 @@ const mapStateToProps = state => ({
   auth: state.auth
 })
 
-export default connect(mapStateToProps)(PrivateRoute)
+export default connect(mapStateToProps)(AdminRoute)

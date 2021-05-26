@@ -8,12 +8,10 @@ const UserSchema = new Schema({
     required: true
   },
   alamat: {
-    type: String,
-    required: true
+    type: String  
   },
   no_hp: {
-    type: String,
-    required: true
+    type: String
   },
   email: {
     type: String,
@@ -21,6 +19,10 @@ const UserSchema = new Schema({
     unique: true
   },
   password: {
+    type: String,
+    required: true
+  },
+  role: {
     type: String,
     required: true
   },
