@@ -1,15 +1,18 @@
 import { useState } from "react"
 import { connect } from "react-redux"
 import { addBedah } from "./../redux/bedah/bedahActions"
-import { Link, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import Navbar from "../components/Navbar"
 
 function Bedah({addBedah}) {
-  const [data, setData] = useState({
+  const initData = {
+    jenis_hewan: '',
+    keluhan: '',
     hari: 'Senin',
     waktu: '05:00-07:00',
     status: 'diajukan'
-  })
+  }
+  const [data, setData] = useState(initData)
   
   const onChange = (e) => {
     setData({
@@ -18,32 +21,50 @@ function Bedah({addBedah}) {
     })
   }
 
+  const initMsg = {
+    jenis_hewan: '',
+    keluhan: '',
+  }
+
+  const [message, setMessage] = useState(initMsg)
+
   const history = useHistory()
+
+  const validate = () => {
+    let err = {}
+    let isValid = true
+    if (!data.jenis_hewan) {
+      isValid = false
+      err.jenis_hewan = 'Harap masukan jenis hewan.'
+    }
+    if (!data.keluhan) {
+      isValid = false
+      err.keluhan = 'Harap masukan keluhan.'
+    }
+    setMessage(err)
+    return isValid
+  }
 
   const onSubmit = (e) => {
     e.preventDefault()
-    try {
-      addBedah(data)
-      setData({
-        jenis_hewan: '',
-        keluhan: '',
-        hari: 'Senin',
-        waktu: '05:00-07:00',
-        status: 'diajukan'
-      })
-      alert('Berhasil!')
-      history.push('/home')
-    } catch(err) {
-      alert(err.message)
+    setMessage(initMsg)
+    if (validate()){
+      console.log(data)
+      try {
+        addBedah(data, history)
+        setData(initData)
+        alert('Berhasil!')
+      } catch(err) {
+        alert(err.message)
+      }
     }
-    
   }
 
   return (
     <>
       <Navbar backButton={true}/>
       <div className="max-w-md py-1 bg-white shadow-lg rounded-lg mx-5 my-4">
-        <Link to='/admin'><h4 className='mt-3 mb-3 text-2xl text-center'>Bedah</h4></Link>
+        <h4 className='mt-3 mb-3 text-2xl text-center'>Bedah</h4>
       </div>
       <div className="max-w-md pt-4 pb-6 px-2 bg-white shadow-lg rounded-lg mx-5 mt-4 mb-10">
         <form onSubmit={onSubmit} className='px-3' method='post'>
@@ -54,13 +75,17 @@ function Bedah({addBedah}) {
             <input
               className="mt-1 block w-full rounded-lg border-1 border-pink-500 focus:outline-none focus:border-white focus:ring-4 focus:ring-pink-400 focus:ring-opacity-60 placeholder-gray-300"
               type="text" placeholder="kucing/anjing/dll" onChange={onChange} name='jenis_hewan'/>
+            <div className='text-xs text-red-500'>{message.jenis_hewan}</div>
           </div>
-          <label className="block text-gray-700 mb-2">
-            Keluhan
-          </label>
-          <input
-            className="mt-1 block w-full rounded-lg border-1 border-pink-500 focus:outline-none focus:border-white focus:ring-4 focus:ring-pink-400 focus:ring-opacity-60 placeholder-gray-300"
-            type="text" placeholder="penyakit apa, dll" onChange={onChange} name='keluhan'/>
+          <div className='mt-2'>
+            <label className="block text-gray-700 mb-2">
+              Keluhan
+            </label>
+            <input
+              className="mt-1 block w-full rounded-lg border-1 border-pink-500 focus:outline-none focus:border-white focus:ring-4 focus:ring-pink-400 focus:ring-opacity-60 placeholder-gray-300"
+              type="text" placeholder="penyakit apa, dll" onChange={onChange} name='keluhan'/>
+            <div className='text-xs text-red-500'>{message.keluhan}</div>
+          </div>
           <label className="block py-2">
             <span className="text-gray-700">Pilih Hari</span>
             <select

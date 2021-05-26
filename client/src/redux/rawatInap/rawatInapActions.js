@@ -1,26 +1,26 @@
-import { GET_BEDAH, BEDAH_LOADING, ADD_BEDAH  } from './bedahTypes'
+import { ADD_RAWAT_INAP, GET_RAWAT_INAP, RAWAT_INAP_LOADING } from './rawatInapTypes'
 import axios from 'axios'
 import {tokenConfig} from '../auth/authActions'
 import {returnErrors} from '../error/errorActions'
 
 export const getBedah = () => dispatch => {
-  dispatch(setBedahLoading())
+  dispatch(setRawatInapLoading())
   axios
-    .get('/api/bedah')
+    .get('/api/rawat-inap')
     .then(res =>
       dispatch({
-        type: GET_BEDAH,
+        type: GET_RAWAT_INAP,
         payload: res.data
       })
     )
 }
 
-export const addBedah = (bedah, history) => (dispatch, getState) => {
+export const addRawatInap = (rawatInap, history) => (dispatch, getState) => {
   axios
-    .post('/api/bedah', bedah, tokenConfig(getState))
+    .post('/api/rawat-inap', rawatInap, tokenConfig(getState))
     .then(res => 
       dispatch({
-        type: ADD_BEDAH,
+        type: ADD_RAWAT_INAP,
         payload:res.data
       }),
       history.push('/home')  
@@ -30,8 +30,8 @@ export const addBedah = (bedah, history) => (dispatch, getState) => {
     );
 }
 
-export const setBedahLoading = () => {
+export const setRawatInapLoading = () => {
   return {
-    type: BEDAH_LOADING
+    type: RAWAT_INAP_LOADING
   }
 }

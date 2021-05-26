@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 // Create Schema
-const BedahSchema = new Schema({
+const PVisitSchema = new Schema({
   user_id: {
     type: String,
     required: true
@@ -11,7 +11,7 @@ const BedahSchema = new Schema({
     type: String,
     required: true
   },
-  keluhan: {
+  jumlah_hewan: {
     type: String,
     required: true
   },
@@ -21,7 +21,6 @@ const BedahSchema = new Schema({
   },
   waktu: {
     type: String,
-    required: true
   },
   booked_at: {
     type: Date,
@@ -36,4 +35,4 @@ const BedahSchema = new Schema({
   }
 })
 
-module.exports = Bedah = mongoose.model('bedah', BedahSchema)
+module.exports = PemeriksaanVisit = mongoose.model('pvisit', PVisitSchema)

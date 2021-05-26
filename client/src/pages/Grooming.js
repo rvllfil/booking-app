@@ -11,7 +11,11 @@ function Grooming() {
     <>
       <Navbar backButton={true}/>
       <div className="max-w-md py-1 bg-white shadow-lg rounded-lg mx-5 my-4">
-        <h4 className='mt-3 mb-3 text-2xl text-center'>Grooming</h4>
+        <h4 className='mt-3 text-2xl text-center'>Grooming</h4>
+        <div className='mt-5 mb-3 flex text-base text-pink-500 px-5'>
+          <svg className="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+          <p className='ml-2'>Grooming hanya di hari Jum'at, reservasi dapat dilakukan 2 hari sebelum grooming</p>
+        </div>
       </div>
       <div className="max-w-md pt-4 pb-6 px-2 bg-white shadow-lg rounded-lg mx-5 mt-4 mb-10">
         <div>Pilih Waktu</div>
@@ -35,11 +39,7 @@ function Grooming() {
             09:30
           </button>
         </div>
-        <div className='mt-8 flex text-xs text-pink-500'>
-          <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-          <p className='ml-2'>Grooming hanya di hari Jum'at, reservasi dapat dilakukan 2 hari sebelum grooming</p>
-        </div>
-        <button className="mt-5 px-5 py-2 w-full text-lg text-white rounded-lg bg-gradient-to-br from-rose-500 to-pink-500 focus:ring-4 focus:ring-pink-500 focus:ring-opacity-50">
+        <button className="mt-8 px-5 py-2 w-full text-lg text-white rounded-lg bg-gradient-to-br from-rose-500 to-pink-500 focus:ring-4 focus:ring-pink-500 focus:ring-opacity-50">
           Booking
         </button>
       </div>

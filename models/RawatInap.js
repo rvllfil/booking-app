@@ -2,24 +2,24 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 // Create Schema
-const BedahSchema = new Schema({
+const RawatInapSchema = new Schema({
   user_id: {
     type: String,
     required: true
   },
-  jenis_hewan: {
+  jumlah: {
     type: String,
     required: true
   },
-  keluhan: {
-    type: String,
+  tanggal_masuk: {
+    type: Date,
     required: true
   },
-  hari: {
-    type: String,
+  tanggal_keluar: {
+    type: Date,
     required: true
   },
-  waktu: {
+  jenis_rawat_inap: {
     type: String,
     required: true
   },
@@ -36,4 +36,4 @@ const BedahSchema = new Schema({
   }
 })
 
-module.exports = Bedah = mongoose.model('bedah', BedahSchema)
+module.exports = RawatInap = mongoose.model('rawatInap', RawatInapSchema)

@@ -10,7 +10,7 @@ const Bedah = require('../../models/Bedah')
 // @access  Public
 router.get('/', async (req, res) => {
   try {
-    const bedah = await Bedah.find().sort({
+    const bedah = await Bedah.find({status: 'diajukan'}).sort({
       booked_at: -1
     })
     if (!bedah) throw Error('Data Bedah tidak ditemukan')
@@ -28,6 +28,7 @@ router.get('/', async (req, res) => {
 // @access  Private
 router.post('/', auth, async (req, res) => {
   const newBedah = new Bedah({
+    user_id: req.user.id,
     jenis_hewan: req.body.jenis_hewan,
     keluhan: req.body.keluhan,
     hari: req.body.hari,
