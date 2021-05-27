@@ -30,7 +30,7 @@ router.get('/', async (req, res) => {
     })
   }
   try {
-    rawat_inap = await Bedah.find({ status: 'diajukan' }).sort({booked_at: -1}).exec()
+    rawat_inap = await RawatInap.find({ status: 'diajukan' }).sort({booked_at: -1}).exec()
   } catch (err) {
     return res.status(400).json({
       error: 'Error Saat mengambil data rawat inap'

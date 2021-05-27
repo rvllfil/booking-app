@@ -13,6 +13,7 @@ router.get('/', async (req, res) => {
     const pvisit = await PVisit.find().sort({
       booked_at: -1
     })
+    // const pvisit = await PVisit.collection.drop()
     if (!pvisit) throw Error('Data Pemeriksaan Visit tidak ditemukan')
     res.status(200).json(pvisit)
 
@@ -33,6 +34,7 @@ router.post('/', auth, async (req, res) => {
     jumlah_hewan: req.body.jumlah_hewan,
     hari: req.body.hari,
     waktu: req.body.waktu,
+    alamat: req.body.alamat,
     status: req.body.status,
   })
 

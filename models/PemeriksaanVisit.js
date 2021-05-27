@@ -22,6 +22,10 @@ const PVisitSchema = new Schema({
   waktu: {
     type: String,
   },
+  alamat: {
+    type: String,
+    required: true
+  },
   booked_at: {
     type: Date,
     default: Date.now
