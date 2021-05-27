@@ -40,7 +40,7 @@ const Router = ({isAuthenticated}) => {
       
       <AdminRoute exact path='/admin' comp={HomeAdmin}/>
 
-      <AdminRoute path='/pengajuan/:id' comp={PengajuanDetail}/>
+      <AdminRoute path='/pengajuan/:slug/:id' comp={PengajuanDetail}/>
 
     </Switch>
   )

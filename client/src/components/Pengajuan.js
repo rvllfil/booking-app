@@ -16,7 +16,7 @@ const Pengajuan = ({pengajuan, getPengajuan, getUsers, isLoadingPengajuan, isLoa
   }, [getUsers])
 
   const findUser = (id) => {  
-    return (users.find(i => i._id === id).nama)
+    return (users.find(i => i._id === id))
   }  
 
   const colors = (text) => {
@@ -29,7 +29,19 @@ const Pengajuan = ({pengajuan, getPengajuan, getUsers, isLoadingPengajuan, isLoa
       color = 'bg-yellow-400 bg-opacity-60'
     }
     return color
-  } 
+  }
+  
+  const jenis_pengajuan = (text) => {
+    let jenis
+    if (text === 'pemeriksaan_visit'){
+      jenis = 'Pemeriksaan Visit'
+    } else if (text === 'bedah'){
+      jenis = 'Bedah'
+    } else if (text === 'rawat_inap'){
+      jenis = 'Rawat Inap'
+    }
+    return jenis 
+  }
 
     return (
     <>
@@ -52,14 +64,22 @@ const Pengajuan = ({pengajuan, getPengajuan, getUsers, isLoadingPengajuan, isLoa
                       {isLoadingUsers ? 
                         <BeatLoader color='#EC4899' loading={isLoadingUsers} size={6} />
                        :
-                        <p>{findUser(item.user_id)}</p>
+                        <p>{findUser(item.user_id).nama}</p>
                       }
                     </div>
                     <div className='flex-1 text-center text-sm my-auto'>
-                      <p className={`inline px-1 rounded-lg ${colors(service)}`}>{service}</p>
+                      <p className={`inline px-1 rounded-lg ${colors(service)}`}>{jenis_pengajuan(service)}</p>
                     </div>
                     <div className='flex-1 my-auto text-center text-base font-bold'>
-                      <Link to={`/pengajuan/${item._id}`}><button className='bg-pink-400 py-1 px-4 rounded-lg'>Detail</button></Link>
+                      <Link to={{
+                        pathname:`/pengajuan/${service}/${item._id}`, 
+                        state: {
+                          pengajuan: jenis_pengajuan(service),
+                          data: item,
+                          user: findUser(item.user_id)
+                        }}}>
+                          <button className='bg-pink-400 py-1 px-4 rounded-lg'>Detail</button>
+                      </Link>
                     </div>
                   </div>  
                 )

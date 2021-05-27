@@ -1,11 +1,27 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import logo from '../logo.png'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import './Navbar.css'
 import Logout from './Logout'
+import { connect } from 'react-redux'
 
-function Navbar({backButton}) {
+function Navbar({backButton, isLoading, user}) {
+  const location = useLocation()
+  const path = location.pathname
   const [toggle, setToggle] = useState(false)
+  const [link, setLink] = useState('')
+  
+  useEffect(() => {
+    try {
+      if (!isLoading && user.role === 'member') {
+        setLink('/home')
+      } else if (!isLoading && user.role === 'admin') {
+        setLink('/admin')
+      }
+    } catch (e) {
+      setLink(path)
+    }
+  }, [user, isLoading, path])
   
   return (
     <>
@@ -22,7 +38,7 @@ function Navbar({backButton}) {
         )}
 
         {backButton && (
-          <Link to="/home">
+          <Link to={link}>
             <button className='focus:outline-none text-white'>
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg">
@@ -73,4 +89,10 @@ Navbar.defaultProps = {
   backButton: false
 }
 
-export default Navbar
+
+const mapStateToProps = state => ({
+  user: state.auth.user,
+  isLoading: state.auth.isLoading
+})
+
+export default connect(mapStateToProps)(Navbar)
