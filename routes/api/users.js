@@ -115,6 +115,22 @@ router.get('/', async (req, res) => {
   }
 })
 
+// @route   GET api/users
+// @desc    Get a User
+// @access  Public
+router.get('/:id', async (req, res) => {
+  try {
+    const users = await User.findById(req.params.id)
+    if (!users) throw Error('Data User tidak ditemukan')
+    res.status(200).json(users)
+
+  } catch (e) {
+    res.status(400).json({
+      msg: e.message
+    })
+  }
+})
+
 // @route   DELETE api/users
 // @desc    delete Users
 // @access  Public

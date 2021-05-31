@@ -1,4 +1,4 @@
-import { ADD_BEDAH, GET_BEDAH, BEDAH_LOADING } from './bedahTypes'
+import { ADD_BEDAH, GET_BEDAH, BEDAH_LOADING, EDIT_BEDAH } from './bedahTypes'
 
 const initialState = {
   bedah : [],
@@ -14,6 +14,9 @@ const bedahReducer = (state = initialState, action) => {
         bedah: action.payload,
         loading: false
     }
+
+    case EDIT_BEDAH:
+      return state
     case ADD_BEDAH:
       return{
         ...state,

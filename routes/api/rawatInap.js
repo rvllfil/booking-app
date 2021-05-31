@@ -47,8 +47,40 @@ router.post('/', auth, async (req, res) => {
   }
 })
 
-// @route   DELETE api/bedah
-// @desc    delete Bedah
+// @route   GET api/rawat-inap
+// @desc    Get A Rawat Inap
+// @access  Public
+router.get('/:id', async (req, res) => {
+  try {
+    const rawatInap = await RawatInap.findById(req.params.id)
+    if (!rawatInap) throw Error('Data Rawat Inap tidak ditemukan')
+    res.status(200).json(rawatInap)
+  } catch (e) {
+    res.status(400).json({
+      msg: e.message
+    })
+  }
+})
+
+// @route   PUT api/bedah
+// @desc    Update Booking Bedah
+// @access  Public
+router.put('/:id', async (req, res) => {
+  try {
+    const rawatInap = await RawatInap.findByIdAndUpdate(req.params.id, req.body, {
+      new: true
+    })
+    if (!rawatInap) throw Error('Terjadi Kesalahan ketika mengubah Data Bedah')
+    res.status(200).json(rawatInap)
+  } catch (e) {
+    res.status(400).json({
+      msg: e.message
+    })
+  }
+})
+
+// @route   DELETE api/rawat-inap
+// @desc    delete Rawat Inap
 // @access  Public
 router.delete('/:id', async (req, res) => {
   try {
@@ -58,6 +90,21 @@ router.delete('/:id', async (req, res) => {
     if (!removed)
       throw Error('Terjadi Kesalahan ketika menghapus Data Rawat Inap')
     res.status(200).json(rawatinap)
+  } catch (e) {
+    res.status(400).json({
+      msg: e.message
+    })
+  }
+})
+
+// WARNING DELETE ALL COLLECTION
+router.delete('/', async (req, res) => {
+  try {
+    if(!req.query.andayakin) throw Error('Kode Rahasia Kosong')
+    else if(req.query.andayakin === 'ya') {
+      const rawatinap = await RawatInap.collection.drop()
+    }
+      res.status(200).json("penghapusan collection rawat inap berhasil")
   } catch (e) {
     res.status(400).json({
       msg: e.message

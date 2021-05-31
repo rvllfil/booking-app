@@ -1,5 +1,6 @@
 import { 
-  ADD_PEMERIKSAAN_VISIT, 
+  ADD_PEMERIKSAAN_VISIT,
+  EDIT_PEMERIKSAAN_VISIT, 
   GET_PEMERIKSAAN_VISIT, 
   PEMERIKSAAN_VISIT_LOADING,
   ADD_PEMERIKSAAN_KLINIK,
@@ -35,6 +36,7 @@ export const pemeriksaanVisitReducer = (state = initPemeriksaan_visit, action) =
         ...state,
         loading: true
       }
+    case EDIT_PEMERIKSAAN_VISIT:
     default:
       return state
   }

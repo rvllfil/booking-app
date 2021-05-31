@@ -14,6 +14,7 @@ import AdminRoute from './AdminRoute'
 import LogRoute from './LogRoute'
 import HomeAdmin from '../pages/admin/HomeAdmin'
 import PengajuanDetail from '../pages/PengajuanDetail'
+import JanjiTemu from '../pages/JanjiTemu'
 
 const Router = ({isAuthenticated}) => {
   return (
@@ -37,7 +38,9 @@ const Router = ({isAuthenticated}) => {
       
       <PrivateRoute exact path='/tentang' comp={About}/>
       <PrivateRoute exact path='/profil' comp={Profil}/>
+      <PrivateRoute exact path='/janji-temu' comp={JanjiTemu} />
       
+
       <AdminRoute exact path='/admin' comp={HomeAdmin}/>
 
       <AdminRoute path='/pengajuan/:slug/:id' comp={PengajuanDetail}/>

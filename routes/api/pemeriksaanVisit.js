@@ -13,7 +13,6 @@ router.get('/', async (req, res) => {
     const pvisit = await PVisit.find().sort({
       booked_at: -1
     })
-    // const pvisit = await PVisit.collection.drop()
     if (!pvisit) throw Error('Data Pemeriksaan Visit tidak ditemukan')
     res.status(200).json(pvisit)
 
@@ -48,5 +47,71 @@ router.post('/', auth, async (req, res) => {
     })
   }
 })
+
+// @route   GET api/pemeriksaan-visit
+// @desc    Get A Pemeriksaan Visit
+// @access  Public
+router.get('/:id', async (req, res) => {
+  try {
+    const pvisit = await PVisit.findById(req.params.id)
+    if (!pvisit) throw Error('Data Pemeriksaan Visit tidak ditemukan')
+    res.status(200).json(pvisit)
+  } catch (e) {
+    res.status(400).json({
+      msg: e.message
+    })
+  }
+})
+
+// @route   PUT api/pemeriksaan-visit
+// @desc    Update Booking PVisit
+// @access  Public
+router.put('/:id', async (req, res) => {
+  try {
+    const pvisit = await PVisit.findByIdAndUpdate(req.params.id, req.body, {
+      new: true
+    })
+    if (!pvisit) throw Error('Terjadi Kesalahan ketika mengubah Data Pemeriksaan Visit')
+    res.status(200).json(pvisit)
+  } catch (e) {
+    res.status(400).json({
+      msg: e.message
+    })
+  }
+})
+
+// @route   DELETE api/pemeriksaan-visit
+// @desc    delete Bedah
+// @access  Public
+router.delete('/:id', async (req, res) => {
+  try {
+    const pvisit = await PVisit.findById(req.params.id)
+    if (!pvisit) throw Error('Data Pemeriksaan Visit Tidak Ditemukan')
+    const removed = await pvisit.remove()
+    if (!removed)
+      throw Error('Terjadi Kesalahan ketika menghapus Data Pemeriksaan Visit')
+    res.status(200).json(pvisit)
+  } catch (e) {
+    res.status(400).json({
+      msg: e.message
+    })
+  }
+})
+
+// WARNING DELETE ALL COLLECTION
+router.delete('/', async (req, res) => {
+  try {
+    if(!req.query.andayakin) throw Error('Kode Rahasia Kosong')
+    else if(req.query.andayakin === 'ya') {
+      const pvisit = await PVisit.collection.drop()
+    }
+      res.status(200).json("penghapusan collection pvisit berhasil")
+  } catch (e) {
+    res.status(400).json({
+      msg: e.message
+    })
+  }
+})
+
 
 module.exports = router

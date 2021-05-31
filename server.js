@@ -15,7 +15,8 @@ mongoose
   .connect(db, {
     useNewUrlParser: true,
     useCreateIndex: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useFindAndModify: false
   })
   .then(() => console.log('MongoDB Connected...'))
   .catch((err) => console.log(err))
@@ -27,6 +28,7 @@ app.use('/api/bedah', require('./routes/api/bedah'))
 app.use('/api/pemeriksaan-visit', require('./routes/api/pemeriksaanVisit'))
 app.use('/api/rawat-inap', require('./routes/api/rawatInap'))
 app.use('/api/pengajuan', require('./routes/api/pengajuan'))
+app.use('/api/services', require('./routes/api/allServices'))
 
 
 const port = process.env.PORT || 5000

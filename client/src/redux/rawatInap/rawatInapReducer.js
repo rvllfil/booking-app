@@ -1,4 +1,4 @@
-import { ADD_RAWAT_INAP, GET_RAWAT_INAP, RAWAT_INAP_LOADING } from './rawatInapTypes'
+import { ADD_RAWAT_INAP, EDIT_RAWAT_INAP, GET_RAWAT_INAP, RAWAT_INAP_LOADING } from './rawatInapTypes'
 
 const initialState = {
   rawatInap : [],
@@ -24,6 +24,7 @@ const rawatInapReducer = (state = initialState, action) => {
         ...state,
         loading: true
       }
+    case EDIT_RAWAT_INAP:
     default:
       return state
   }

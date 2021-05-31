@@ -4,6 +4,7 @@ import errorReducer  from './error/errorReducer'
 import bedahReducer from './bedah/bedahReducer'
 import rawatInapReducer from './rawatInap/rawatInapReducer'
 import pengajuanReducer from './pengajuan/pengajuanReducer'
+import janjiTemuReducer from './janjiTemu/reducer'
 import usersReducer from './users/usersReducer'
 import {pemeriksaanVisitReducer, pemeriksaanKlinikReducer} from './pemeriksaan/pemeriksaanReducer'
 
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   pemeriksaan_klinik: pemeriksaanKlinikReducer,
   rawat_inap: rawatInapReducer,
   pengajuan: pengajuanReducer,
+  janjiTemu: janjiTemuReducer,
   users: usersReducer
 })
 

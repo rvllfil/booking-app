@@ -15,33 +15,14 @@ const Pengajuan = ({pengajuan, getPengajuan, getUsers, isLoadingPengajuan, isLoa
     getUsers()
   }, [getUsers])
 
-  const findUser = (id) => {  
-    return (users.find(i => i._id === id))
+  const findUser = (id) => {
+    try {
+      return (users.find(i => i._id === id).nama)
+    } catch(e) {
+      
+    }
+    
   }  
-
-  const colors = (text) => {
-    let color
-    if (text === 'pemeriksaan_visit'){
-      color = 'bg-green-400 bg-opacity-60'
-    } else if (text === 'bedah'){
-      color = 'bg-blue-400 bg-opacity-60'
-    } else if (text === 'rawat_inap'){
-      color = 'bg-yellow-400 bg-opacity-60'
-    }
-    return color
-  }
-  
-  const jenis_pengajuan = (text) => {
-    let jenis
-    if (text === 'pemeriksaan_visit'){
-      jenis = 'Pemeriksaan Visit'
-    } else if (text === 'bedah'){
-      jenis = 'Bedah'
-    } else if (text === 'rawat_inap'){
-      jenis = 'Rawat Inap'
-    }
-    return jenis 
-  }
 
     return (
     <>
@@ -64,7 +45,7 @@ const Pengajuan = ({pengajuan, getPengajuan, getUsers, isLoadingPengajuan, isLoa
                       {isLoadingUsers ? 
                         <BeatLoader color='#EC4899' loading={isLoadingUsers} size={6} />
                        :
-                        <p>{findUser(item.user_id).nama}</p>
+                        <p>{findUser(item.user_id)}</p>
                       }
                     </div>
                     <div className='flex-1 text-center text-sm my-auto'>
@@ -73,12 +54,8 @@ const Pengajuan = ({pengajuan, getPengajuan, getUsers, isLoadingPengajuan, isLoa
                     <div className='flex-1 my-auto text-center text-base font-bold'>
                       <Link to={{
                         pathname:`/pengajuan/${service}/${item._id}`, 
-                        state: {
-                          pengajuan: jenis_pengajuan(service),
-                          data: item,
-                          user: findUser(item.user_id)
-                        }}}>
-                          <button className='bg-pink-400 py-1 px-4 rounded-lg'>Detail</button>
+                      }}>
+                        <button className='bg-pink-400 py-1 px-4 rounded-lg'>Detail</button>
                       </Link>
                     </div>
                   </div>  
@@ -101,6 +78,30 @@ const Pengajuan = ({pengajuan, getPengajuan, getUsers, isLoadingPengajuan, isLoa
       </div> 
     </>  
   )
+}
+
+const colors = (text) => {
+  let color
+  if (text === 'pemeriksaan_visit'){
+    color = 'bg-green-400 bg-opacity-60'
+  } else if (text === 'bedah'){
+    color = 'bg-blue-400 bg-opacity-60'
+  } else if (text === 'rawat_inap'){
+    color = 'bg-yellow-400 bg-opacity-60'
+  }
+  return color
+}
+
+const jenis_pengajuan = (text) => {
+  let result
+  if (text === 'pemeriksaan_visit'){
+    result = 'Pemeriksaan Visit'
+  } else if (text === 'bedah'){
+    result = 'Bedah'
+  } else if (text === 'rawat_inap'){
+    result = 'Rawat Inap'
+  }
+  return result 
 }
 
 const mapStateToProps = state => ({

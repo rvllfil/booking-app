@@ -13,6 +13,18 @@ export const getUsers = () => dispatch => {
     )
 }
 
+export const getUser = (id) => dispatch => {
+  dispatch(setUsersLoading())
+  axios
+    .get(`/api/users/${id}`)
+    .then(res =>
+      dispatch({
+        type: GET_USERS,
+        payload: res.data
+      })
+    )
+}
+
 export const setUsersLoading = () => {
   return {
     type: USERS_LOADING

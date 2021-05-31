@@ -10,7 +10,7 @@ const Bedah = require('../../models/Bedah')
 // @access  Public
 router.get('/', async (req, res) => {
   try {
-    const bedah = await Bedah.find({status: 'diajukan'}).sort({
+    const bedah = await Bedah.find().sort({
       booked_at: -1
     })
     if (!bedah) throw Error('Data Bedah tidak ditemukan')
@@ -47,10 +47,25 @@ router.post('/', auth, async (req, res) => {
   }
 })
 
+// @route   GET api/bedah
+// @desc    Get A Bedah
+// @access  Public
+router.get('/:id', async (req, res) => {
+  try {
+    const bedah = await Bedah.findById(req.params.id)
+    if (!bedah) throw Error('Data Bedah tidak ditemukan')
+    res.status(200).json(bedah)
+  } catch (e) {
+    res.status(400).json({
+      msg: e.message
+    })
+  }
+})
+
 // @route   PUT api/bedah
 // @desc    Update Booking Bedah
-// @access  Public
-router.put('/:id', async (req, res) => {
+// @access  Private
+router.put('/:id', auth, async (req, res) => {
   try {
     const bedah = await Bedah.findByIdAndUpdate(req.params.id, req.body, {
       new: true
@@ -75,6 +90,21 @@ router.delete('/:id', async (req, res) => {
     if (!removed)
       throw Error('Terjadi Kesalahan ketika menghapus Data Bedah')
     res.status(200).json(bedah)
+  } catch (e) {
+    res.status(400).json({
+      msg: e.message
+    })
+  }
+})
+
+// WARNING DELETE ALL COLLECTION
+router.delete('/', async (req, res) => {
+  try {
+    if(!req.query.andayakin) throw Error('Kode Rahasia Kosong')
+    else if(req.query.andayakin === 'ya') {
+      const bedah = await Bedah.collection.drop()
+    }
+    res.status(200).json("penghapusan collection bedah berhasil")
   } catch (e) {
     res.status(400).json({
       msg: e.message

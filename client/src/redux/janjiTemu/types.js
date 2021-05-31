@@ -1,0 +1,2 @@
+export const GET_JANJI_TEMU = "GET_JANJI_TEMU"
+export const JANJI_TEMU_LOADING = "JANJI_TEMU_LOADING"
