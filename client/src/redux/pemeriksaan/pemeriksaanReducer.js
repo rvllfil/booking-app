@@ -5,7 +5,8 @@ import {
   PEMERIKSAAN_VISIT_LOADING,
   ADD_PEMERIKSAAN_KLINIK,
   GET_PEMERIKSAAN_KLINIK,
-  PEMERIKSAAN_KLINIK_LOADING 
+  PEMERIKSAAN_KLINIK_LOADING, 
+  EDIT_PEMERIKSAAN_KLINIK
 } from './pemeriksaanTypes'
 
 const initPemeriksaan_visit = {
@@ -60,6 +61,7 @@ export const pemeriksaanKlinikReducer = (state = initPemeriksaan_klinik, action)
         ...state,
         loading: true
       }
+    case EDIT_PEMERIKSAAN_KLINIK:
     default:
       return state
   }

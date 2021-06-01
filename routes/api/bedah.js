@@ -34,6 +34,8 @@ router.post('/', auth, async (req, res) => {
     hari: req.body.hari,
     waktu: req.body.waktu,
     status: req.body.status,
+    booked_at: req.body.booked_at,
+    tanggal_reservasi: req.body.tanggal_reservasi,
   })
 
   try {

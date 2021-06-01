@@ -5,7 +5,8 @@ import {
   ADD_PEMERIKSAAN_KLINIK,
   GET_PEMERIKSAAN_KLINIK,
   PEMERIKSAAN_KLINIK_LOADING, 
-  EDIT_PEMERIKSAAN_VISIT
+  EDIT_PEMERIKSAAN_VISIT,
+  EDIT_PEMERIKSAAN_KLINIK
 } from './pemeriksaanTypes'
 import axios from 'axios'
 import {tokenConfig} from '../auth/authActions'
@@ -67,5 +68,65 @@ export const editPemeriksaanVisit = (id, pemeriksaanVisit, history) => (dispatch
 export const setPemeriksaanVisitLoading = () => {
   return {
     type: PEMERIKSAAN_VISIT_LOADING
+  }
+}
+
+
+export const getPemeriksaanKlinik = () => dispatch => {
+  dispatch(setPemeriksaanKlinikLoading())
+  axios
+    .get('/api/pemeriksaan-klinik')
+    .then(res =>
+      dispatch({
+        type: GET_PEMERIKSAAN_KLINIK,
+        payload: res.data
+      })
+    )
+}
+
+export const getOnePemeriksaanKlinik = (id) => dispatch => {
+  dispatch(setPemeriksaanKlinikLoading())
+  axios
+    .get(`/api/pemeriksaan-klinik/${id}`)
+    .then(res =>
+      dispatch({
+        type: GET_PEMERIKSAAN_KLINIK,
+        payload: res.data
+      })
+    )
+}
+
+export const addPemeriksaanKlinik = (pemeriksaanKlinik, history) => (dispatch, getState) => {
+  axios
+    .post('/api/pemeriksaan-klinik', pemeriksaanKlinik, tokenConfig(getState))
+    .then(res => 
+      dispatch({
+        type: ADD_PEMERIKSAAN_KLINIK,
+        payload:res.data
+      }),
+      history.push('/home')  
+    )
+    .catch(err =>
+      dispatch(returnErrors(err.response.data, err.response.status))
+    );
+}
+
+export const editPemeriksaanKlinik = (id, pemeriksaanKlinik, history) => (dispatch, getState) => {
+  axios
+    .put(`/api/pemeriksaan-klinik/${id}`, pemeriksaanKlinik, tokenConfig(getState))
+    .then(res => 
+      dispatch({
+        type: EDIT_PEMERIKSAAN_KLINIK,
+      }),
+      history.push('/admin')  
+    )
+    .catch(err =>
+      dispatch(returnErrors(err.response.data, err.response.status))
+    );
+}
+
+export const setPemeriksaanKlinikLoading = () => {
+  return {
+    type: PEMERIKSAAN_KLINIK_LOADING
   }
 }

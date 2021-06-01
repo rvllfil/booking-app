@@ -53,9 +53,10 @@ function RawatInap({addRawatInap}) {
   const onSubmit = (e) => {
     e.preventDefault()
     if(validate()) {
-      console.log(data)
+      const newData = generateData(data)
+      console.log(newData)
       try {
-        addRawatInap(data, history)
+        addRawatInap(newData, history)
         setData(initData)
         alert('Berhasil!')
       } catch(err) {
@@ -122,6 +123,25 @@ function RawatInap({addRawatInap}) {
       </div>
     </>
   )
+}
+
+const generateData = data => {
+  let newData = {
+    ...data,
+    booked_at: generateDate(),
+    status: "diajukan"
+  }
+  newData = {
+    ...newData,
+    tanggal_reservasi: newData.tanggal_masuk
+  }
+  return newData
+} 
+
+const generateDate = () => {
+  const date = Date.now()
+  const newDate = new Date(date)
+  return newDate
 }
 
 export default connect(null, {

@@ -63,17 +63,7 @@ const Pengajuan = ({pengajuan, getPengajuan, getUsers, isLoadingPengajuan, isLoa
               })
             )
           })
-        }  
-          {/* // <div>
-          //   <div>{template_nam}</div>
-          //   {
-          //     templates[template_name].items.map(item => {
-          //       return(<div>{item}</div>)
-          //     })
-          //   }
-          // </div> */}
-        
-        
+        }          
         <div className='pb-6'></div>
       </div> 
     </>  
@@ -88,6 +78,8 @@ const colors = (text) => {
     color = 'bg-blue-400 bg-opacity-60'
   } else if (text === 'rawat_inap'){
     color = 'bg-yellow-400 bg-opacity-60'
+  } else if (text === 'pemeriksaan_klinik'){
+    color = 'bg-orange-400 bg-opacity-60'
   }
   return color
 }
@@ -100,7 +92,9 @@ const jenis_pengajuan = (text) => {
     result = 'Bedah'
   } else if (text === 'rawat_inap'){
     result = 'Rawat Inap'
-  }
+  } else if (text === 'pemeriksaan_klinik'){
+    result = 'Pemeriksaan Klinik'
+  } 
   return result 
 }
 

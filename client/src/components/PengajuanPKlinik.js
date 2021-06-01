@@ -2,33 +2,33 @@ import { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { useHistory } from 'react-router'
 import { BeatLoader } from 'react-spinners'
-import { getOnePemeriksaanVisit, editPemeriksaanVisit } from '../redux/pemeriksaan/pemeriksaanActions'
+import { getOnePemeriksaanKlinik, editPemeriksaanKlinik } from '../redux/pemeriksaan/pemeriksaanActions'
 import { getUser } from '../redux/users/usersActions'
 
 const PengajuanPVisit = ({
   id, 
-  pvisit, 
+  pklinik, 
   user, 
   getUser, 
-  getOnePemeriksaanVisit,
-  editPemeriksaanVisit, 
-  isLoadingPVisit, 
+  getOnePemeriksaanKlinik,
+  editPemeriksaanKlinik, 
+  isLoadingPKlinik, 
   isLoadingUser
 }) => {
   useEffect(() => {
-    getOnePemeriksaanVisit(id)
-  }, [getOnePemeriksaanVisit, id])
+    getOnePemeriksaanKlinik(id)
+  }, [getOnePemeriksaanKlinik, id])
 
   useEffect(() => {
-    if(!isLoadingPVisit) {
-      getUser(pvisit.user_id)
+    if(!isLoadingPKlinik) {
+      getUser(pklinik.user_id)
     }
-  }, [getUser, pvisit, isLoadingPVisit])
+  }, [getUser, pklinik, isLoadingPKlinik])
 
   const [message, setMessage] = useState('')
   const [data, setData] = useState({
     waktu: '',
-    status: '',
+    status: ''
   })
   
   const validate = () => {
@@ -56,22 +56,22 @@ const PengajuanPVisit = ({
     
     if(validate()){
       console.log(data)
-      editPemeriksaanVisit(id, data, history)
+      editPemeriksaanKlinik(id, data, history)
     }
   }
 
   const onTolak = () => {
     if(window.confirm("apakah anda yang yakin?")) {
-      editPemeriksaanVisit(id, { status:'ditolak' }, history)
+      editPemeriksaanKlinik(id, {status:'ditolak'}, history)
     }
   }
 
   return (
     <>
       {
-        isLoadingPVisit ? 
+        isLoadingPKlinik ? 
         <div className='text-center pt-4 pb-8 '> 
-          <BeatLoader color='#EC4899' loading={isLoadingPVisit} size={15} />
+          <BeatLoader color='#EC4899' loading={isLoadingPKlinik} size={15} />
         </div> :
         <div>
           <p className='mt-2 text-lg font-bold text-pink-400 '>Nama</p>
@@ -84,13 +84,11 @@ const PengajuanPVisit = ({
           </>
           }
           <p className='mt-2 text-lg font-bold text-pink-400 '>Jenis Hewan</p>
-          <p className='text-lg text-black'>{pvisit.jenis_hewan}</p>
+          <p className='text-lg text-black'>{pklinik.jenis_hewan}</p>
           <p className='mt-2 text-lg font-bold text-pink-400 '>Jumlah Hewan</p>
-          <p className='text-lg text-black'>{pvisit.jumlah_hewan}</p>
+          <p className='text-lg text-black'>{pklinik.jumlah_hewan}</p>
           <p className='mt-2 text-lg font-bold text-pink-400 '>Tanggal Reservasi</p>
-          <p className='text-lg text-black'>{moment(pvisit.tanggal_reservasi)}</p>
-          <p className='mt-2 text-lg font-bold text-pink-400 '>Alamat</p>
-          <p className='text-lg text-black'>{pvisit.alamat}</p>
+          <p className='text-lg text-black'>{moment(pklinik.tanggal_reservasi)}</p>
           
           <form action="post" onSubmit={onSubmit}>
             <div className='mt-5'>
@@ -133,13 +131,13 @@ const moment = (date) => {
 
 const mapStateToProps = state => ({
   user: state.users.users,
-  pvisit: state.pemeriksaan_visit.pemeriksaan_visit,
-  isLoadingPVisit: state.pemeriksaan_visit.loading,
+  pklinik: state.pemeriksaan_klinik.pemeriksaan_klinik,
+  isLoadingPKlinik: state.pemeriksaan_klinik.loading,
   isLoadingUser: state.users.loading 
 })
 
 export default connect(mapStateToProps, {
   getUser,
-  getOnePemeriksaanVisit,
-  editPemeriksaanVisit
+  getOnePemeriksaanKlinik,
+  editPemeriksaanKlinik
 })(PengajuanPVisit)

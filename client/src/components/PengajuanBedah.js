@@ -31,7 +31,6 @@ const PengajuanBedah = ({
   const [data, setData] = useState({
     waktu: '',
     status: '',
-    tanggal_reservasi: ''
   })
     
   const validate = () => {
@@ -49,7 +48,6 @@ const PengajuanBedah = ({
     setData({
       ...data,
       [e.target.name]: e.target.value,
-      'tanggal_reservasi': getReservasiDate(bedah.booked_at, bedah.hari),
       'status': 'diterima'
     })
   }
@@ -65,13 +63,7 @@ const PengajuanBedah = ({
   }
   const onTolak = () => {
     if(window.confirm("apakah anda yang yakin?")) {
-      editBedah(
-        id, 
-        {
-          status:'ditolak', 
-          tanggal_reservasi: getReservasiDate(bedah.booked_at, bedah.hari) 
-        }, 
-        history)
+      editBedah(id, {status:'ditolak'}, history)
     }
   }
 
@@ -96,8 +88,8 @@ const PengajuanBedah = ({
           <p className='text-lg text-black'>{bedah.jenis_hewan}</p>
           <p className='mt-2 text-lg font-bold text-pink-400 '>Keluhan</p>
           <p className='text-lg text-black'>{bedah.keluhan}</p>
-          <p className='mt-2 text-lg font-bold text-pink-400 '>Waktu</p>
-          <p className='text-lg text-black'>{`Hari ${bedah.hari} Pukul ${bedah.waktu}`}</p>
+          <p className='mt-2 text-lg font-bold text-pink-400 '>Tanggal Reservasi</p>
+          <p className='text-lg text-black'>{moment(bedah.tanggal_reservasi)}</p>
           
           <form action="post" onSubmit={onSubmit}>
             <div className='mt-5'>
@@ -130,32 +122,12 @@ const PengajuanBedah = ({
   )
 }
 
-const day = (hari) => {
-  let num = 0
-  if(hari.toLowerCase() === 'senin') num = 1
-  else if(hari.toLowerCase() === 'selasa') num = 2
-  else if(hari.toLowerCase() === 'rabu') num = 3
-  else if(hari.toLowerCase() === 'kamis') num = 4
-  else if(hari.toLowerCase() === 'jumat') num = 5
-  else if(hari.toLowerCase() === 'sabtu') num = 6
-  else if(hari.toLowerCase() === 'minggu') num = 7  
-  return num
+const moment = (date) => {
+  let dated = new Date(date)
+  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
+  let result = dated.toLocaleDateString('id-ID', options)
+  return result 
 }
-
-const getReservasiDate = (booked_date, days) => {
-  
-  days = day(days)
-  
-  let dateSub
-  let result = new Date(booked_date)
-  if(result.getDay() < days) {
-    dateSub = days - result.getDay()    
-  } else if(result.getDay() >= days) {
-    dateSub = (days + 7) - result.getDay()
-  }
-  result.setDate(result.getDate() + dateSub)
-  return result
-} 
 
 const mapStateToProps = state => ({
   user: state.users.users,

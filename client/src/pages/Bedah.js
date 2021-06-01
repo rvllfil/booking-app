@@ -49,9 +49,10 @@ function Bedah({addBedah}) {
     e.preventDefault()
     setMessage(initMsg)
     if (validate()){
-      console.log(data)
+      const newData = generateData(data)
+      console.log(newData)
       try {
-        addBedah(data, history)
+        addBedah(newData, history)
         setData(initData)
         alert('Berhasil!')
       } catch(err) {
@@ -114,6 +115,50 @@ function Bedah({addBedah}) {
       </div>
     </>
   )
+}
+
+const generateData = data => {
+  let newData = {
+    ...data,
+    booked_at: generateDate(),
+    status: "diajukan"
+  }
+  newData = {
+    ...newData,
+    tanggal_reservasi: getReservasiDate(newData.booked_at, newData.hari)
+  }
+  return newData
+} 
+
+const day = (hari) => {
+  let num = 0
+  if(hari.toLowerCase() === 'senin') num = 1
+  else if(hari.toLowerCase() === 'selasa') num = 2
+  else if(hari.toLowerCase() === 'rabu') num = 3
+  else if(hari.toLowerCase() === 'kamis') num = 4
+  else if(hari.toLowerCase() === 'jumat') num = 5
+  else if(hari.toLowerCase() === 'sabtu') num = 6
+  else if(hari.toLowerCase() === 'minggu') num = 7  
+  return num
+}
+
+const generateDate = () => {
+  const date = Date.now()
+  const newDate = new Date(date)
+  return newDate
+}
+
+const getReservasiDate = (booked_date, days) => {
+  days = day(days)
+  let dateSub
+  let result = new Date(booked_date)
+  if(result.getDay() < days) {
+    dateSub = days - result.getDay()    
+  } else if(result.getDay() >= days) {
+    dateSub = (days + 7) - result.getDay()
+  }
+  result.setDate(result.getDate() + dateSub)
+  return result
 }
 
 const mapStateToProps = (state) => {

@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import PengajuanBedah from '../components/PengajuanBedah'
 import PengajuanPVisit from '../components/PengajuanPVisit'
+import PengajuanPKlinik from '../components/PengajuanPKlinik'
 import PengajuanRawatInap from '../components/PengajuanRawatInap'
 
 const PengajuanDetail = () => {
@@ -11,6 +12,8 @@ const PengajuanDetail = () => {
       return <PengajuanRawatInap id={id}/>
     } else if(slug === 'pemeriksaan_visit') {
       return <PengajuanPVisit id={id}/>
+    } else if(slug === 'pemeriksaan_klinik') {
+      return <PengajuanPKlinik id={id}/>
     } else if(slug === 'bedah') {
       return <PengajuanBedah id={id}/>
     } 
@@ -37,7 +40,9 @@ const jenis_pengajuan = (text) => {
     result = 'Bedah'
   } else if (text === 'rawat_inap'){
     result = 'Rawat Inap'
-  }
+  } else if (text === 'pemeriksaan_klinik'){
+    result = 'Pemeriksaan Klinik'
+  } 
   return result 
 }
 

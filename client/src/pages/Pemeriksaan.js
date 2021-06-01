@@ -2,9 +2,14 @@ import { useState } from "react"
 import { connect } from "react-redux"
 import { useHistory } from "react-router"
 import Navbar from "../components/Navbar"
-import { addPemeriksaanVisit } from '../redux/pemeriksaan/pemeriksaanActions'
+import { addPemeriksaanVisit, addPemeriksaanKlinik } from '../redux/pemeriksaan/pemeriksaanActions'
 
-function Pemeriksaan({user, isLoading, addPemeriksaanVisit}) {
+function Pemeriksaan({
+  user, 
+  isLoading, 
+  addPemeriksaanVisit,
+  addPemeriksaanKlinik
+}) {
   const [pemeriksaan, setPemeriksaan] = useState('klinik')
   
   const alamat = !isLoading ? user.alamat : ''
@@ -59,9 +64,21 @@ function Pemeriksaan({user, isLoading, addPemeriksaanVisit}) {
     e.preventDefault()
     if(pemeriksaan === 'visit') {
       if(validate()){
-        console.log(data)
+        const newData = generateData(data)
+        console.log(newData)
         try {
-          addPemeriksaanVisit(data, history)
+          addPemeriksaanVisit(newData, history)
+          alert('Berhasil!')
+        } catch(err) {
+          alert(err.message)
+        }
+      }  
+    } else if(pemeriksaan === 'klinik') {
+      if(validate()){
+        const newData = generateData(data)
+        console.log(newData)
+        try {
+          addPemeriksaanKlinik(newData, history)
           alert('Berhasil!')
         } catch(err) {
           alert(err.message)
@@ -140,6 +157,51 @@ function Pemeriksaan({user, isLoading, addPemeriksaanVisit}) {
   )
 }
 
+
+const generateData = data => {
+  let newData = {
+    ...data,
+    booked_at: generateDate(),
+    status: "diajukan"
+  }
+  newData = {
+    ...newData,
+    tanggal_reservasi: getReservasiDate(newData.booked_at, newData.hari)
+  }
+  return newData
+} 
+
+const day = (hari) => {
+  let num = 0
+  if(hari.toLowerCase() === 'senin') num = 1
+  else if(hari.toLowerCase() === 'selasa') num = 2
+  else if(hari.toLowerCase() === 'rabu') num = 3
+  else if(hari.toLowerCase() === 'kamis') num = 4
+  else if(hari.toLowerCase() === 'jumat') num = 5
+  else if(hari.toLowerCase() === 'sabtu') num = 6
+  else if(hari.toLowerCase() === 'minggu') num = 7  
+  return num
+}
+
+const generateDate = () => {
+  const date = Date.now()
+  const newDate = new Date(date)
+  return newDate
+}
+
+const getReservasiDate = (booked_date, days) => {
+  days = day(days)
+  let dateSub
+  let result = new Date(booked_date)
+  if(result.getDay() < days) {
+    dateSub = days - result.getDay()    
+  } else if(result.getDay() >= days) {
+    dateSub = (days + 7) - result.getDay()
+  }
+  result.setDate(result.getDate() + dateSub)
+  return result
+}
+
 const mapStateToProps = state => ({
   user: state.auth.user,
   isLoading: state.auth.isLoading
@@ -147,5 +209,6 @@ const mapStateToProps = state => ({
 
 
 export default connect(mapStateToProps, {
-  addPemeriksaanVisit
+  addPemeriksaanVisit,
+  addPemeriksaanKlinik
 })(Pemeriksaan)
