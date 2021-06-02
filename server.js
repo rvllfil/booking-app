@@ -25,6 +25,7 @@ mongoose
 app.use('/api/users', require('./routes/api/users'))
 app.use('/api/auth', require('./routes/api/auth'))
 app.use('/api/bedah', require('./routes/api/bedah'))
+app.use('/api/grooming', require('./routes/api/grooming'))
 app.use('/api/pemeriksaan-visit', require('./routes/api/pemeriksaanVisit'))
 app.use('/api/pemeriksaan-klinik', require('./routes/api/pemeriksaanKlinik'))
 app.use('/api/rawat-inap', require('./routes/api/rawatInap'))

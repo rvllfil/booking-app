@@ -4,6 +4,7 @@ const auth = require('../../middleware/auth')
 
 // Models
 const Bedah = require('../../models/Bedah')
+const Grooming = require('../../models/Grooming')
 const PVisit = require('../../models/PemeriksaanVisit')
 const PKlinik = require('../../models/PemeriksaanKlinik')
 const RawatInap = require('../../models/RawatInap')
@@ -14,6 +15,7 @@ const RawatInap = require('../../models/RawatInap')
 router.get('/', async (req, res) => {
   //FIND ALL CONSULTATIONS FILTERED BY STATUS
   let bedah
+  let grooming
   let pemeriksaan_visit
   let pemeriksaan_klinik
   let rawat_inap
@@ -23,6 +25,14 @@ router.get('/', async (req, res) => {
   } catch (err) {
     return res.status(400).json({
       error: 'Error Saat mengambil data bedah'
+    })
+  }
+  try {
+    if(!req.query.user_id) grooming = await Grooming.find().sort({booked_at: -1}).exec()
+    else grooming = await Grooming.find({user_id: req.query.user_id}).sort({booked_at: -1}).exec()
+  } catch (err) {
+    return res.status(400).json({
+      error: 'Error Saat mengambil data grooming'
     })
   }
   try {
@@ -49,7 +59,7 @@ router.get('/', async (req, res) => {
       error: 'Error Saat mengambil data rawat inap'
     })
   }
-  res.json({ bedah, pemeriksaan_visit, pemeriksaan_klinik, rawat_inap })
+  res.json({ bedah, grooming, pemeriksaan_visit, pemeriksaan_klinik, rawat_inap })
 })
 
 module.exports = router
