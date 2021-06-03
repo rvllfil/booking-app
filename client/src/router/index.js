@@ -15,6 +15,12 @@ import LogRoute from './LogRoute'
 import HomeAdmin from '../pages/admin/HomeAdmin'
 import PengajuanDetail from '../pages/PengajuanDetail'
 import JanjiTemu from '../pages/JanjiTemu'
+import BedahAdmin from '../pages/admin/BedahAdmin'
+import RawatInapAdmin from '../pages/admin/RawatInapAdmin'
+import GroomingAdmin from '../pages/admin/GroomingAdmin'
+import PVisitAdmin from '../pages/admin/PVisitAdmin'
+import PKlinikAdmin from '../pages/admin/PKlinikAdmin'
+import Members from '../pages/admin/Members'
 
 const Router = ({isAuthenticated}) => {
   return (
@@ -42,6 +48,12 @@ const Router = ({isAuthenticated}) => {
       
 
       <AdminRoute exact path='/admin' comp={HomeAdmin}/>
+      <AdminRoute exact path='/admin/bedah' comp={BedahAdmin}/>
+      <AdminRoute exact path='/admin/rawat-inap' comp={RawatInapAdmin}/>
+      <AdminRoute exact path='/admin/grooming' comp={GroomingAdmin}/>
+      <AdminRoute exact path='/admin/pemeriksaan-visit' comp={PVisitAdmin}/>
+      <AdminRoute exact path='/admin/pemeriksaan-klinik' comp={PKlinikAdmin}/>
+      <AdminRoute exact path='/admin/members' comp={Members}/>
 
       <AdminRoute path='/pengajuan/:slug/:id' comp={PengajuanDetail}/>
 
