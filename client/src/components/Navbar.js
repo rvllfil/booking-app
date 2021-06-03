@@ -22,6 +22,69 @@ function Navbar({backButton, isLoading, user}) {
       setLink(path)
     }
   }, [user, isLoading, path])
+
+  const LinkLogo = () => {
+    if(user.role === 'member') {
+      return (
+      <Link to='/home'>
+        <img className='mr-8' src={logo} alt="Ry-VET" width="120" />
+      </Link>
+      ) 
+    } else if(user.role === 'admin') {
+      return (
+      <Link to='/admin'>
+        <img className='mr-8' src={logo} alt="Ry-VET" width="120" />
+      </Link>
+      ) 
+    }
+  }
+
+  const NavLink = () => {
+    if(user.role === 'member') {
+      return (
+        <ul className='flex flex-col min-h-screen'>
+          <li>
+            <Link onClick={() => setToggle(!toggle)} to="/profil" className='p-4 block text-white text-2xl hover:bg-rose-600'> Profil </Link>
+          </li>
+          <li>
+            <Link onClick={() => setToggle(!toggle)} to="/janji-temu" className='p-4 block text-white text-2xl hover:bg-rose-600'> Janji Temu </Link>
+          </li>
+          <li>
+            <Link onClick={() => setToggle(!toggle)} to="/tentang" className='p-4 block text-white text-2xl hover:bg-rose-600'> Tentang </Link>
+          </li>
+          <li className='mt-auto'>
+            <Logout sty='p-4 block text-white text-2xl hover:bg-rose-600' />
+          </li>
+        </ul>
+      ) 
+    } else if(user.role === 'admin') {
+      return (
+      <ul className='flex flex-col min-h-screen'>
+        <li className=''>
+          <Link onClick={() => setToggle(!toggle)} to="/admin/bedah" className='p-4 block text-white text-2xl hover:bg-rose-600'> Bedah </Link>
+        </li>
+        <li>
+          <Link onClick={() => setToggle(!toggle)} to="/admin/rawat-inap" className='p-4 block text-white text-2xl hover:bg-rose-600'> Rawat Inap </Link>
+        </li>
+        <li>
+          <Link onClick={() => setToggle(!toggle)} to="/admin/grooming" className='p-4 block text-white text-2xl hover:bg-rose-600'> Grooming </Link>
+        </li>
+        <li>
+          <Link onClick={() => setToggle(!toggle)} to="/admin/pemeriksaan-visit" className='p-4 block text-white text-2xl hover:bg-rose-600'> Pemeriksaan Visit </Link>
+        </li>
+        <li>
+          <Link onClick={() => setToggle(!toggle)} to="/admin/pemeriksaan-klinik" className='p-4 block text-white text-2xl hover:bg-rose-600'> Pemeriksaan Klinik </Link>
+        </li>
+        <li>
+          <Link onClick={() => setToggle(!toggle)} to="/admin/members" className='p-4 block text-white text-2xl hover:bg-rose-600'> Daftar Member </Link>
+        </li>
+        <li className='mt-auto font-bold'>
+          <Logout sty='p-4 text-white text-2xl hover:bg-rose-600' />
+        </li>
+      </ul>
+      ) 
+    }
+  }
   
   return (
     <>
@@ -48,33 +111,26 @@ function Navbar({backButton, isLoading, user}) {
             </button>
           </Link>
         )}
-
-        <Link to='/home'>
-          <img className='mr-8' src={logo} alt="Ry-VET" width="120" />
-        </Link>
+        
+        {
+          isLoading && user === null ?
+          <img className='mr-8' src={logo} alt="Ry-VET" width="120" /> :
+          LinkLogo()
+        }
+        
         <div></div>
       </div>
 
       {toggle && (
       <>
       <div className='top-0 fixed inset-0 bg-black opacity-70' onClick={()=> setToggle(!toggle)}></div>
-      <aside className='top-0 bg-gradient-to-br from-rose-500 to-pink-500 w-4/5 min-h-screen fixed z-20 flex flex-col shadow'>
-        <div className='flex-grow'>
+      <aside className='top-0 bg-gradient-to-br from-rose-500 to-pink-500 w-4/5 min-h-screen fixed z-20 shadow'>
+        <div className=''>
           <nav>
-            <ul>
-              <li>
-                <Link onClick={() => setToggle(!toggle)} to="/profil" className='p-4 block text-white text-xl hover:bg-rose-600'> Profil </Link>
-              </li>
-              <li>
-                <Link onClick={() => setToggle(!toggle)} to="/janji-temu" className='p-4 block text-white text-xl hover:bg-rose-600'> Janji Temu </Link>
-              </li>
-              <li>
-                <Link onClick={() => setToggle(!toggle)} to="/tentang" className='p-4 block text-white text-xl hover:bg-rose-600'> Tentang </Link>
-              </li>
-              <li>
-                <Logout sty='p-4 block text-white text-xl hover:bg-rose-600' />
-              </li>
-            </ul>
+          {
+            isLoading && user === null ? '' :
+            NavLink()
+          }
           </nav>
         </div>
       </aside>
