@@ -29,7 +29,7 @@ const Pengajuan = ({
 
   useEffect(() => {
     getUsers()
-  }, [getUsers, pengajuan])
+  }, [getUsers])
 
   const findUser = (id) => {
     try {

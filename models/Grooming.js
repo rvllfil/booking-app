@@ -11,6 +11,10 @@ const GroomingSchema = new Schema({
     type: String,
     required: true
   },
+  status: {
+    type: String,
+    required: true
+  },
   booked_at: {
     type: Date,
     default: Date.now

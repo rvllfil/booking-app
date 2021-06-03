@@ -42,6 +42,18 @@ export const generateDate = () => {
   return newDate
 }
 
+export const compareDate = (tanggal_reservasi) => {
+  let date = new Date(tanggal_reservasi)
+  let now = generateDate()
+  let d = date.getDate()+'-'+date.getMonth()+'-'+date.getFullYear()
+  let n = now.getDate()+'-'+now.getMonth()+'-'+now.getFullYear()
+  if(n === d) {
+    return true
+  } else {
+    return false
+  }
+}
+
 export const getReservasiDate = (booked_date, days) => {
   days = day(days)
   let dateSub
@@ -84,7 +96,9 @@ export const colors = (text) => {
   } else if (text === 'rawat_inap'){
     color = 'bg-yellow-400 bg-opacity-60'
   } else if (text === 'pemeriksaan_klinik'){
-    color = 'bg-green-800 bg-opacity-60'
+    color = 'bg-indigo-400 bg-opacity-60'
+  } else if (text === 'grooming'){
+    color = 'bg-pink-400 bg-opacity-60'
   }
   return color
 }
@@ -92,9 +106,9 @@ export const colors = (text) => {
 export const jenis_pengajuan = (text) => {
   let result
   if (text === 'pemeriksaan_visit'){
-    result = 'Pemeriksaan Visit'
+    result = 'P. Visit'
   } else if (text === 'pemeriksaan_klinik'){
-    result = 'Pemeriksaan Klinik'
+    result = 'P. Klinik'
   } else if (text === 'bedah'){
     result = 'Bedah'
   } else if (text === 'rawat_inap'){

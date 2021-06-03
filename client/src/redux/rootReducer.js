@@ -6,6 +6,7 @@ import groomingReducer from './grooming/groomingReducer'
 import rawatInapReducer from './rawatInap/rawatInapReducer'
 import pengajuanReducer from './pengajuan/pengajuanReducer'
 import janjiTemuReducer from './janjiTemu/reducer'
+import reservasiReducer from './reservasi/reducer'
 import usersReducer from './users/usersReducer'
 import {pemeriksaanVisitReducer, pemeriksaanKlinikReducer} from './pemeriksaan/pemeriksaanReducer'
 
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   rawat_inap: rawatInapReducer,
   pengajuan: pengajuanReducer,
   janjiTemu: janjiTemuReducer,
+  reservasi: reservasiReducer,
   users: usersReducer
 })
 

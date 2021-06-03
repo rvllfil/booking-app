@@ -22,6 +22,7 @@ function Grooming({
 
   const initData = {
     waktu: '',
+    status: 'diterima',
     booked_at: generateDate(),
     tanggal_reservasi: getReservasiDate(generateDate(), 'jumat')
   }
