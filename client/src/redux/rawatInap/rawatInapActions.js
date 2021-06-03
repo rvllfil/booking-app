@@ -42,14 +42,14 @@ export const addRawatInap = (rawatInap, history) => (dispatch, getState) => {
     );
 }
 
-export const editRawatInap = (id, rawatInap, history) => (dispatch, getState) => {
+export const editRawatInap = (id, rawatInap, history = null) => (dispatch, getState) => {
   axios
     .put(`/api/rawat-inap/${id}`, rawatInap, tokenConfig(getState))
     .then(res => 
       dispatch({
         type: EDIT_RAWAT_INAP
       }),
-      history.push('/admin')  
+      !history? '' : history.push('/admin')   
     )
     .catch(err =>
       dispatch(returnErrors(err.response.data, err.response.status))

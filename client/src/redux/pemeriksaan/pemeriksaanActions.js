@@ -51,14 +51,14 @@ export const addPemeriksaanVisit = (pemeriksaanVisit, history) => (dispatch, get
     );
 }
 
-export const editPemeriksaanVisit = (id, pemeriksaanVisit, history) => (dispatch, getState) => {
+export const editPemeriksaanVisit = (id, pemeriksaanVisit, history = null) => (dispatch, getState) => {
   axios
     .put(`/api/pemeriksaan-visit/${id}`, pemeriksaanVisit, tokenConfig(getState))
     .then(res => 
       dispatch({
         type: EDIT_PEMERIKSAAN_VISIT,
       }),
-      history.push('/admin')  
+      !history? '' : history.push('/admin')  
     )
     .catch(err =>
       dispatch(returnErrors(err.response.data, err.response.status))
@@ -111,14 +111,14 @@ export const addPemeriksaanKlinik = (pemeriksaanKlinik, history) => (dispatch, g
     );
 }
 
-export const editPemeriksaanKlinik = (id, pemeriksaanKlinik, history) => (dispatch, getState) => {
+export const editPemeriksaanKlinik = (id, pemeriksaanKlinik, history = null) => (dispatch, getState) => {
   axios
     .put(`/api/pemeriksaan-klinik/${id}`, pemeriksaanKlinik, tokenConfig(getState))
     .then(res => 
       dispatch({
         type: EDIT_PEMERIKSAAN_KLINIK,
       }),
-      history.push('/admin')  
+      !history? '' : history.push('/admin')  
     )
     .catch(err =>
       dispatch(returnErrors(err.response.data, err.response.status))

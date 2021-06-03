@@ -42,7 +42,7 @@ export const addBedah = (bedah, history) => (dispatch, getState) => {
     );
 }
 
-export const editBedah = (id, bedah, history) => (dispatch, getState) => {
+export const editBedah = (id, bedah, history = null) => (dispatch, getState) => {
   axios
     .put(`/api/bedah/${id}`, bedah, tokenConfig(getState))
     .then(res =>
@@ -50,7 +50,7 @@ export const editBedah = (id, bedah, history) => (dispatch, getState) => {
         type: EDIT_BEDAH
       })  
     )
-    .then(history.push('/admin'))
+    .then(!history ? '' :history.push('/admin'))
     .catch(err =>
       dispatch(returnErrors(err.response.data, err.response.status))
     );
