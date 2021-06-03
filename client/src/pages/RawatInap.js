@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { connect } from "react-redux"
 import { useHistory } from "react-router"
+import { numeric } from "../components/elements/func"
 import Navbar from "../components/Navbar"
 import { addRawatInap } from '../redux/rawatInap/rawatInapActions'
 
@@ -94,8 +95,7 @@ function RawatInap({addRawatInap}) {
             </label>
             <input
               className="mt-1 block w-full rounded-lg border-1 border-pink-500 focus:outline-none focus:border-white focus:ring-4 focus:ring-pink-400 focus:ring-opacity-60 placeholder-gray-300"
-               type="number" placeholder="0" onKeyDown={ e=> ( e.key === 'e' || e.key === '.' ) &&
-            e.preventDefault() } name='jumlah' onChange={onChange}/>
+               type="text" placeholder="1" onKeyDown={numeric} name='jumlah' onChange={onChange}/>
             <div className='text-xs text-red-500'>{message.jumlah}</div>
           </div>
           <div className='grid grid-cols-2 gap-2 mt-2'>
@@ -133,10 +133,17 @@ const generateData = data => {
   }
   newData = {
     ...newData,
-    tanggal_reservasi: newData.tanggal_masuk
+    tanggal_reservasi: date(newData.tanggal_masuk)
   }
+  console.log(newData)
   return newData
 } 
+
+const date = (tanggal) => {
+  let d = new Date(tanggal)
+  d.setHours(23, 59, 59)
+  return d
+}
 
 const generateDate = () => {
   const date = Date.now()
