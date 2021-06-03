@@ -43,18 +43,14 @@ const Pengajuan = ({
   const autoTolak = (service, data, pengajuan = []) => {
     let n = generateDate()
     let d = new Date(data.tanggal_reservasi)
-    console.log('fun')
     if (service === 'pemeriksaan_visit'){
       d = new Date(data.tanggal_reservasi)
       if(n.getTime() > d.getTime()){
         editPemeriksaanVisit(data._id, {status: "ditolak"})
       } 
     } else if (service === 'bedah'){
-      console.log(n, d)
-      console.log(n.getTime(), d.getTime())
       d = new Date(data.tanggal_reservasi)
       if(n.getTime() > d.getTime()){
-        console.log('wew')
         editBedah(data._id, {status: "ditolak"})
       }
     } else if (service === 'rawat_inap'){

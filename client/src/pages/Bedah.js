@@ -3,6 +3,7 @@ import { connect } from "react-redux"
 import { addBedah } from "./../redux/bedah/bedahActions"
 import { useHistory } from 'react-router-dom'
 import Navbar from "../components/Navbar"
+import { alphabet, generateData } from "../components/elements/func"
 
 function Bedah({addBedah}) {
   const initData = {
@@ -10,7 +11,6 @@ function Bedah({addBedah}) {
     keluhan: '',
     hari: 'Senin',
     waktu: '05:00-07:00',
-    status: 'diajukan'
   }
   const [data, setData] = useState(initData)
   
@@ -75,7 +75,9 @@ function Bedah({addBedah}) {
             </label>
             <input
               className="mt-1 block w-full rounded-lg border-1 border-pink-500 focus:outline-none focus:border-white focus:ring-4 focus:ring-pink-400 focus:ring-opacity-60 placeholder-gray-300"
-              type="text" placeholder="kucing/anjing/dll" onChange={onChange} name='jenis_hewan'/>
+              type="text" placeholder="kucing/anjing/dll" onChange={onChange} name='jenis_hewan'
+              onKeyDown={alphabet}
+            />
             <div className='text-xs text-red-500'>{message.jenis_hewan}</div>
           </div>
           <div className='mt-2'>
@@ -115,51 +117,8 @@ function Bedah({addBedah}) {
       </div>
     </>
   )
-}
-
-const generateData = data => {
-  let newData = {
-    ...data,
-    booked_at: generateDate(),
-    status: "diajukan"
-  }
-  newData = {
-    ...newData,
-    tanggal_reservasi: getReservasiDate(newData.booked_at, newData.hari)
-  }
-  return newData
 } 
 
-const day = (hari) => {
-  let num = 0
-  if(hari.toLowerCase() === 'senin') num = 1
-  else if(hari.toLowerCase() === 'selasa') num = 2
-  else if(hari.toLowerCase() === 'rabu') num = 3
-  else if(hari.toLowerCase() === 'kamis') num = 4
-  else if(hari.toLowerCase() === 'jumat') num = 5
-  else if(hari.toLowerCase() === 'sabtu') num = 6
-  else if(hari.toLowerCase() === 'minggu') num = 7  
-  return num
-}
-
-const generateDate = () => {
-  const date = Date.now()
-  const newDate = new Date(date)
-  return newDate
-}
-
-const getReservasiDate = (booked_date, days) => {
-  days = day(days)
-  let dateSub
-  let result = new Date(booked_date)
-  if(result.getDay() < days) {
-    dateSub = days - result.getDay()    
-  } else if(result.getDay() >= days) {
-    dateSub = (days + 7) - result.getDay()
-  }
-  result.setDate(result.getDate() + dateSub)
-  return result
-}
 
 const mapStateToProps = (state) => {
   return {

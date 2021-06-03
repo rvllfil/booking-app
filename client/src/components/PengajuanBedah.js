@@ -89,8 +89,8 @@ const PengajuanBedah = ({
           <p className='text-lg text-black'>{bedah.jenis_hewan}</p>
           <p className='mt-2 text-lg font-bold text-pink-400 '>Keluhan</p>
           <p className='text-lg text-black'>{bedah.keluhan}</p>
-          <p className='mt-2 text-lg font-bold text-pink-400 '>Tanggal Reservasi</p>
-          <p className='text-lg text-black'>{moment(bedah.tanggal_reservasi)}</p>
+          <p className='mt-2 text-lg font-bold text-pink-400 '>Reservasi</p>
+          <p className='text-lg text-black'>{`${moment(bedah.tanggal_reservasi)} ${bedah.waktu}`}</p>
           
           <form action="post" onSubmit={onSubmit}>
             <div className='mt-5'>
