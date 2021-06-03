@@ -4,6 +4,7 @@ import PengajuanBedah from '../components/PengajuanBedah'
 import PengajuanPVisit from '../components/PengajuanPVisit'
 import PengajuanPKlinik from '../components/PengajuanPKlinik'
 import PengajuanRawatInap from '../components/PengajuanRawatInap'
+import { jenis_pengajuan } from '../components/elements/func'
 
 const PengajuanDetail = () => {
   const { slug, id } = useParams()
@@ -30,20 +31,6 @@ const PengajuanDetail = () => {
       </div>
     </>
   )
-}
-
-const jenis_pengajuan = (text) => {
-  let result
-  if (text === 'pemeriksaan_visit'){
-    result = 'Pemeriksaan Visit'
-  } else if (text === 'bedah'){
-    result = 'Bedah'
-  } else if (text === 'rawat_inap'){
-    result = 'Rawat Inap'
-  } else if (text === 'pemeriksaan_klinik'){
-    result = 'Pemeriksaan Klinik'
-  } 
-  return result 
 }
 
 export default PengajuanDetail

@@ -4,6 +4,7 @@ import { useHistory } from 'react-router'
 import { BeatLoader } from 'react-spinners'
 import { getOnePemeriksaanKlinik, editPemeriksaanKlinik } from '../redux/pemeriksaan/pemeriksaanActions'
 import { getUser } from '../redux/users/usersActions'
+import { moment } from './elements/func'
 
 const PengajuanPVisit = ({
   id, 
@@ -120,13 +121,6 @@ const PengajuanPVisit = ({
     </>
         
   )
-}
-
-const moment = (date) => {
-  let dated = new Date(date)
-  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
-  let result = dated.toLocaleDateString('id-ID', options)
-  return result 
 }
 
 const mapStateToProps = state => ({

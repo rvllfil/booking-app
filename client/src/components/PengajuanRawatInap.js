@@ -4,6 +4,7 @@ import { useHistory } from 'react-router'
 import { BeatLoader } from 'react-spinners'
 import { getOneRawatInap, editRawatInap } from '../redux/rawatInap/rawatInapActions'
 import { getUser } from '../redux/users/usersActions'
+import { moment } from './elements/func'
 
 
 const PengajuanRawatInap = ({
@@ -19,14 +20,7 @@ const PengajuanRawatInap = ({
   useEffect(() => {
     getOneRawatInap(id)
   }, [getOneRawatInap, id])
-
-  const moment = (date) => {
-    let dated = new Date(date)
-    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
-    let result = dated.toLocaleDateString('id-ID', options)
-    return result 
-  }
-  
+ 
   useEffect(() => {
     if(!isLoadingRawatInap) {
       getUser(rawatInap.user_id)

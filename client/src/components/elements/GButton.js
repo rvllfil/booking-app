@@ -3,7 +3,7 @@ import React from 'react'
 const GButton = ({onChange, data, groomData}) => {
   const disable = (waktu) => {
     let result = false
-    if(groomData.length > 1){
+    if(groomData.length > 0){
       groomData.map(data => {
         if(data.waktu === waktu) {
           result = true

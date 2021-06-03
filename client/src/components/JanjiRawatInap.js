@@ -1,3 +1,5 @@
+import { color, moment } from "./elements/func"
+
 const JanjiRawatInap = ({service, data}) => {
   return (
     <>
@@ -10,25 +12,6 @@ const JanjiRawatInap = ({service, data}) => {
       </div>
     </>
   )
-}
-
-const color = (text) => {
-  let result
-  if (text === 'diajukan'){
-    result = 'bg-blue-400'
-  } else if (text === 'diterima'){
-    result = 'bg-green-400'
-  } else if (text === 'ditolak'){
-    result = 'bg-red-400'
-  }
-  return result 
-}
-
-const moment = (date) => {
-  let dated = new Date(date)
-  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
-  let result = dated.toLocaleDateString('id-ID', options)
-  return result 
 }
 
 export default JanjiRawatInap

@@ -4,6 +4,7 @@ import { useHistory } from 'react-router'
 import { BeatLoader } from 'react-spinners'
 import { getOneBedah, editBedah } from '../redux/bedah/bedahActions'
 import { getUser } from '../redux/users/usersActions'
+import { moment } from './elements/func'
 
 
 const PengajuanBedah = ({
@@ -32,8 +33,8 @@ const PengajuanBedah = ({
     waktu: '',
     status: '',
   })
-    
-  const validate = () => {
+
+ const validate = () => {
     let err = {}
     let isValid = true
     if (!data.waktu) {
@@ -120,13 +121,6 @@ const PengajuanBedah = ({
       }
     </>
   )
-}
-
-const moment = (date) => {
-  let dated = new Date(date)
-  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
-  let result = dated.toLocaleDateString('id-ID', options)
-  return result 
 }
 
 const mapStateToProps = state => ({
