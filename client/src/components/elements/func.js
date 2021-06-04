@@ -1,7 +1,3 @@
-import { editBedah } from "../../redux/bedah/bedahActions"
-import { editPemeriksaanKlinik, editPemeriksaanVisit } from "../../redux/pemeriksaan/pemeriksaanActions"
-import { editRawatInap } from "../../redux/rawatInap/rawatInapActions"
-
 export const numeric = e => {
   if(e.keyCode > 57) return e.preventDefault()
 }
@@ -71,6 +67,13 @@ export const getReservasiDate = (booked_date, days) => {
 export const moment = (date) => {
   let dated = new Date(date)
   const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
+  let result = dated.toLocaleDateString('id-ID', options)
+  return result 
+}
+
+export const tanggal = (date) => {
+  let dated = new Date(date)
+  const options = { weekday: 'long', month: 'long', day: 'numeric' }
   let result = dated.toLocaleDateString('id-ID', options)
   return result 
 }

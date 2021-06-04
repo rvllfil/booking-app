@@ -34,9 +34,9 @@ export const addRawatInap = (rawatInap, history) => (dispatch, getState) => {
       dispatch({
         type: ADD_RAWAT_INAP,
         payload:res.data
-      }),
-      history.push('/home')  
+      })  
     )
+    .then(history.push('/home'))
     .catch(err =>
       dispatch(returnErrors(err.response.data, err.response.status))
     );

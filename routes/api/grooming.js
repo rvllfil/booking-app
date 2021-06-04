@@ -10,9 +10,9 @@ const Grooming = require('../../models/Grooming')
 // @access  Public
 router.get('/', async (req, res) => {
   try {
-    const grooming = await Grooming.find().sort({
-      booked_at: -1
-    })
+    const grooming = await Grooming.find().sort([
+      ['tanggal_reservasi', 1], ['waktu', 1]
+    ])
     if (!grooming) throw Error('Data Grooming tidak ditemukan')
     res.status(200).json(grooming)
 

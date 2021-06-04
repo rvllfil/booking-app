@@ -10,9 +10,9 @@ const Bedah = require('../../models/Bedah')
 // @access  Public
 router.get('/', async (req, res) => {
   try {
-    const bedah = await Bedah.find().sort({
-      booked_at: -1
-    })
+    const bedah = await Bedah.find().sort([
+      ['tanggal_reservasi', 1], ['waktu', 1]
+    ])
     if (!bedah) throw Error('Data Bedah tidak ditemukan')
     res.status(200).json(bedah)
 

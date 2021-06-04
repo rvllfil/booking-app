@@ -10,9 +10,9 @@ const PVisit = require('../../models/PemeriksaanVisit')
 // @access  Public
 router.get('/', async (req, res) => {
   try {
-    const pvisit = await PVisit.find().sort({
-      booked_at: -1
-    })
+    const pvisit = await PVisit.find().sort([
+      ['tanggal_reservasi', 1], ['waktu', 1]
+    ])
     if (!pvisit) throw Error('Data Pemeriksaan Visit tidak ditemukan')
     res.status(200).json(pvisit)
 

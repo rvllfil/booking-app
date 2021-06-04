@@ -11,7 +11,7 @@ const RawatInap = require('../../models/RawatInap')
 router.get('/', async (req, res) => {
   try {
     const rawatinap = await RawatInap.find().sort({
-      booked_at: -1
+      tanggal_reservasi: 1
     })
     if (!rawatinap) throw Error('Data Rawat Inap tidak ditemukan')
     res.status(200).json(rawatinap)

@@ -39,14 +39,14 @@ router.get('/', async (req, res) => {
   try {
     if(!req.query.user_id) { 
       if (req.query.status === 'diterima')  {
-       grooming = await Grooming.find({status: 'diterima'}).sort({booked_at: -1}).exec()
+       grooming = await Grooming.find({status: 'diterima'}).sort({waktu: 1}).exec()
       } else {
-        grooming = await Grooming.find().sort({booked_at: -1}).exec()
+        grooming = await Grooming.find().sort({waktu: 1}).exec()
       }
     } else if (!req.query.status && !req.query.user_id) {
-      grooming = await Grooming.find().sort({booked_at: -1}).exec()
+      grooming = await Grooming.find().sort({waktu: 1}).exec()
     } else {
-      grooming = await Grooming.find({user_id: req.query.user_id}).sort({booked_at: -1}).exec()
+      grooming = await Grooming.find({user_id: req.query.user_id}).sort({waktu: 1}).exec()
     }
   } catch (err) {
     return res.status(400).json({

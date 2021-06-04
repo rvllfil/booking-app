@@ -10,9 +10,9 @@ const PKlinik = require('../../models/PemeriksaanKlinik')
 // @access  Public
 router.get('/', async (req, res) => {
   try {
-    const pklinik = await PKlinik.find().sort({
-      booked_at: -1
-    })
+    const pklinik = await PKlinik.find().sort([
+      ['tanggal_reservasi', 1], ['waktu', 1]
+    ])
     if (!pklinik) throw Error('Data Pemeriksaan Klinik tidak ditemukan')
     res.status(200).json(pklinik)
 

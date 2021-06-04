@@ -44,16 +44,16 @@ function Navbar({backButton, isLoading, user}) {
       return (
         <ul className='flex flex-col min-h-screen'>
           <li>
-            <Link onClick={() => setToggle(!toggle)} to="/profil" className='p-4 block text-white text-2xl hover:bg-rose-600'> Profil </Link>
+            <Link onClick={() => setToggle(!toggle)} to="/profil" className='p-4 block text-white text-xl hover:bg-rose-600'> Profil </Link>
           </li>
           <li>
-            <Link onClick={() => setToggle(!toggle)} to="/janji-temu" className='p-4 block text-white text-2xl hover:bg-rose-600'> Janji Temu </Link>
+            <Link onClick={() => setToggle(!toggle)} to="/janji-temu" className='p-4 block text-white text-xl hover:bg-rose-600'> Janji Temu </Link>
           </li>
           <li>
-            <Link onClick={() => setToggle(!toggle)} to="/tentang" className='p-4 block text-white text-2xl hover:bg-rose-600'> Tentang </Link>
+            <Link onClick={() => setToggle(!toggle)} to="/tentang" className='p-4 block text-white text-xl hover:bg-rose-600'> Tentang </Link>
           </li>
           <li className='mt-auto'>
-            <Logout sty='p-4 block text-white text-2xl hover:bg-rose-600' />
+            <Logout sty='p-4 block text-white text-xl hover:bg-rose-600' />
           </li>
         </ul>
       ) 
@@ -61,25 +61,25 @@ function Navbar({backButton, isLoading, user}) {
       return (
       <ul className='flex flex-col min-h-screen'>
         <li className=''>
-          <Link onClick={() => setToggle(!toggle)} to="/admin/bedah" className='p-4 block text-white text-2xl hover:bg-rose-600'> Bedah </Link>
+          <Link onClick={() => setToggle(!toggle)} to="/admin/bedah" className='p-4 block text-white text-xl hover:bg-rose-600'> Bedah </Link>
         </li>
         <li>
-          <Link onClick={() => setToggle(!toggle)} to="/admin/rawat-inap" className='p-4 block text-white text-2xl hover:bg-rose-600'> Rawat Inap </Link>
+          <Link onClick={() => setToggle(!toggle)} to="/admin/rawat-inap" className='p-4 block text-white text-xl hover:bg-rose-600'> Rawat Inap </Link>
         </li>
         <li>
-          <Link onClick={() => setToggle(!toggle)} to="/admin/grooming" className='p-4 block text-white text-2xl hover:bg-rose-600'> Grooming </Link>
+          <Link onClick={() => setToggle(!toggle)} to="/admin/grooming" className='p-4 block text-white text-xl hover:bg-rose-600'> Grooming </Link>
         </li>
         <li>
-          <Link onClick={() => setToggle(!toggle)} to="/admin/pemeriksaan-visit" className='p-4 block text-white text-2xl hover:bg-rose-600'> Pemeriksaan Visit </Link>
+          <Link onClick={() => setToggle(!toggle)} to="/admin/pemeriksaan-visit" className='p-4 block text-white text-xl hover:bg-rose-600'> Pemeriksaan Visit </Link>
         </li>
         <li>
-          <Link onClick={() => setToggle(!toggle)} to="/admin/pemeriksaan-klinik" className='p-4 block text-white text-2xl hover:bg-rose-600'> Pemeriksaan Klinik </Link>
+          <Link onClick={() => setToggle(!toggle)} to="/admin/pemeriksaan-klinik" className='p-4 block text-white text-xl hover:bg-rose-600'> Pemeriksaan Klinik </Link>
         </li>
         <li>
-          <Link onClick={() => setToggle(!toggle)} to="/admin/members" className='p-4 block text-white text-2xl hover:bg-rose-600'> Daftar Member </Link>
+          <Link onClick={() => setToggle(!toggle)} to="/admin/members" className='p-4 block text-white text-xl hover:bg-rose-600'> Daftar Member </Link>
         </li>
         <li className='mt-auto font-bold'>
-          <Logout sty='p-4 text-white text-2xl hover:bg-rose-600' />
+          <Logout sty='p-4 text-white text-xl hover:bg-rose-600' />
         </li>
       </ul>
       ) 
@@ -113,7 +113,7 @@ function Navbar({backButton, isLoading, user}) {
         )}
         
         {
-          isLoading && user === null ?
+          isLoading || user === null ?
           <img className='mr-8' src={logo} alt="Ry-VET" width="120" /> :
           LinkLogo()
         }
@@ -128,7 +128,7 @@ function Navbar({backButton, isLoading, user}) {
         <div className=''>
           <nav>
           {
-            isLoading && user === null ? '' :
+            isLoading || user === null ? '' :
             NavLink()
           }
           </nav>
