@@ -1,5 +1,5 @@
 {
-  "mongoURI": "mongodb+srv://cooladmin:kucingbulat123@cluster0.2osmz.mongodb.net/booking_app?retryWrites=true&w=majority",
+  "mongoURI": "mongodb+srv://wafanuraeni:wafanuraeni24@cluster0.dhyqi.mongodb.net/booking_app?retryWrites=true&w=majority",
   "jwtSecret": "bav_jwtSecret666",
   "jwtRefresh": "refreshJWT666Tokenrelso",
   "secretKeyToCreateAdmin": "untukMemBuatAdminK4muPakaiK0deIni" 

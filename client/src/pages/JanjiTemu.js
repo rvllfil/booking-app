@@ -62,7 +62,7 @@ const JanjiTemu = ({
                 <div key={i} className="max-w-md pt-4 pb-4 px-2 bg-white shadow-lg rounded-lg mx-5 mt-3">
                   {view(service, item)}
                 </div> 
-                :<div key={i}>{service}</div>       
+                : ''       
               )
             })
           )

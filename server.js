@@ -1,6 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const config = require('config')
+const path = require('path')
 
 const app = express()
 
@@ -32,6 +33,15 @@ app.use('/api/rawat-inap', require('./routes/api/rawatInap'))
 app.use('/api/pengajuan', require('./routes/api/pengajuan'))
 app.use('/api/services', require('./routes/api/allServices'))
 
+
+if(process.env.NODE_ENV === 'production') {
+  // set static folder
+  app.use(wxpress.static('client/build'))
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+  })
+}
 
 const port = process.env.PORT || 5000
 

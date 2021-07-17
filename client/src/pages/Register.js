@@ -4,6 +4,7 @@ import { register } from '../redux/auth/authActions'
 import logo from '../logo.png'
 import PropTypes from 'prop-types'
 import { useHistory } from 'react-router'
+import { Link } from 'react-router-dom'
 
 
 function Register({register, error}) {
@@ -260,6 +261,10 @@ function Register({register, error}) {
                   >
                     Daftar
                   </button>
+                
+                  <div className="mt-12 text-sm font-display font-semibold text-gray-700 text-center">
+                    Sudah punya akun ? <Link className='cursor-pointer text-pink-600 hover:text-pink-800' to='/login'>Masuk</Link> 
+                  </div>
                 </div>
               </form>
             </div>

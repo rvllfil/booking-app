@@ -33,23 +33,35 @@ router.post('/', (req, res) => {
         role
       })
 
-      // Create Salt & Hash
-      bcrypt.genSalt(10, (err, salt) => {
-        bcrypt.hash(newUser.password, salt, (err, hash) => {
-          if(err) throw err
-          newUser.password = hash
-          newUser.save()
-            .then(user => {
-              res.json({
-                user: { 
-                  id: user.id,
-                  nama: user.nama,
-                  email: user.email,
-                }
-              })
-            })
+      // Create pass without encrypt
+      newUser.save()
+        .then(user => {
+          res.json({
+            user: { 
+              id: user.id,
+              nama: user.nama,
+              email: user.email,
+            }
+          })
         })
-      })
+
+      // Create pass with encrypt bcrypt
+      // bcrypt.genSalt(10, (err, salt) => {
+      //   bcrypt.hash(newUser.password, salt, (err, hash) => {
+      //     if(err) throw err
+      //     newUser.password = hash
+      //     newUser.save()
+      //       .then(user => {
+      //         res.json({
+      //           user: { 
+      //             id: user.id,
+      //             nama: user.nama,
+      //             email: user.email,
+      //           }
+      //         })
+      //       })
+      //   })
+      // })
 
     })
 })
@@ -77,24 +89,36 @@ router.post('/admin', createAdmin, (req, res) => {
         role
       })
 
-      // Create Salt & Hash
-      bcrypt.genSalt(10, (err, salt) => {
-        bcrypt.hash(newUser.password, salt, (err, hash) => {
-          if(err) throw err
-          newUser.password = hash
-          newUser.save()
-            .then(user => {
-              res.json({
-                user: { 
-                  id: user.id,
-                  nama: user.nama,
-                  email: user.email,
-                  rolel: user.role
-                }
-              })
-            })
+      newUser.save()
+        .then(user => {
+          res.json({
+            user: { 
+              id: user.id,
+              nama: user.nama,
+              email: user.email,
+              role: user.role
+            }
+          })
         })
-      })
+
+      // Create Salt & Hash
+      // bcrypt.genSalt(10, (err, salt) => {
+      //   bcrypt.hash(newUser.password, salt, (err, hash) => {
+      //     if(err) throw err
+      //     newUser.password = hash
+      //     newUser.save()
+      //       .then(user => {
+      //         res.json({
+      //           user: { 
+      //             id: user.id,
+      //             nama: user.nama,
+      //             email: user.email,
+      //             rolel: user.role
+      //           }
+      //         })
+      //       })
+      //   })
+      // })
 
     })
 })
