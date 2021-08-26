@@ -99,7 +99,7 @@ const PengajuanBedah = ({
               </label>
               <input
                 className="mt-1 block w-full rounded-lg border-1 border-pink-500 focus:outline-none focus:border-white focus:ring-4 focus:ring-pink-400 focus:ring-opacity-60 placeholder-gray-300"
-                type="text" placeholder="kucing/anjing/dll" onChange={onChange} name='waktu'/>
+                type="text" placeholder="08:00" onChange={onChange} name='waktu'/>
               <div className='text-xs text-red-500'>{message.waktu}</div>
             </div>
             <div className='flex flex-row-reverse'>

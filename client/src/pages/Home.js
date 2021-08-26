@@ -11,7 +11,7 @@ function Home() {
   return (
     <>
       <Navbar />
-      <div className="grid grid-cols-2 gap-6 mt-10 mx-5 text-center text-lg text-white">
+      <div className="grid grid-cols-2 gap-6 mt-10 mx-5 text-center text-lg text-white lg:grid-cols-4 lg:gap-20 lg:mx-40">
         <Link to='/grooming'>
         <button
           className='w-full pb-2 bg-gradient-to-br from-rose-400 to-pink-500 shadow-lg rounded-lg ring-4 ring-pink-500 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-opacity-60'>

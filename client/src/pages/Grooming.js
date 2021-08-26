@@ -84,28 +84,30 @@ function Grooming({
   return (
     <>
       <Navbar backButton={true}/>
-      <div className="max-w-md py-1 bg-white shadow-lg rounded-lg mx-5 my-4">
-        <h4 className='mt-3 text-2xl text-center'>Grooming</h4>
-        <div className='mt-5 mb-3 flex items-center text-base text-pink-500 px-5'>
-          <svg className="w-20 h-20" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-            <p className='ml-2 text-lg'>Grooming hanya di hari Jum'at, reservasi dapat dilakukan 2 hari sebelum grooming</p>
+      <div className='min-w-screen flex flex-col items-center justify-center'>
+        <div className="max-w-md py-1 bg-white shadow-lg rounded-lg mx-5 my-4 w-full">
+          <h4 className='mt-3 text-2xl text-center lg:text-4xl'>Grooming</h4>
+          <div className='mt-5 mb-3 flex items-center text-base text-pink-500 px-5'>
+            <svg className="w-20 h-20" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+              <p className='ml-2 text-lg'>Grooming hanya di hari Jum'at, reservasi dapat dilakukan 2 hari sebelum grooming</p>
+          </div>
         </div>
-      </div>
-      <div className="max-w-md pt-4 pb-6 px-2 bg-white shadow-lg rounded-lg mx-5 mt-4 mb-10">
-        <div className='text-xl text-center'>Pilih Waktu</div>
-        <GButton 
-          onChange={waktuChange}
-          data={data}
-          groomData={groomingData}
-        />
-        <div className='mt-4 text-xl text-red-500'>{message.waktu}</div>
-        <button 
-          className="mt-8 px-5 py-2 w-full text-lg text-white rounded-lg bg-gradient-to-br from-rose-500 to-pink-500 focus:ring-4 focus:ring-pink-500 focus:ring-opacity-50"
-          type='button'
-          onClick={onSubmit}
-        >
-          Booking
-        </button>
+        <div className="max-w-md pt-4 pb-6 px-2 bg-white shadow-lg rounded-lg mx-5 mt-4 mb-10 w-full">
+          <div className='text-xl text-center lg:text-4xl lg:mt-3'>Pilih Waktu</div>
+          <GButton 
+            onChange={waktuChange}
+            data={data}
+            groomData={groomingData}
+          />
+          <div className='mt-4 text-xl text-red-500'>{message.waktu}</div>
+          <button 
+            className="mt-8 px-5 py-2 w-full text-lg text-white rounded-lg bg-gradient-to-br from-rose-500 to-pink-500 focus:ring-4 focus:ring-pink-500 focus:ring-opacity-50 lg:text-3xl lg:py-4"
+            type='button'
+            onClick={onSubmit}
+          >
+            Booking
+          </button>
+        </div>
       </div>
     </>
   )

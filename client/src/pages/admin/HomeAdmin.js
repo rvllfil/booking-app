@@ -6,8 +6,10 @@ const HomeAdmin = () => {
   return (
     <>
       <Navbar />
-      <Reservasi />
-      <Pengajuan />
+      <div className='flex flex-col items-center justify-center mx-2 lg:flex-row lg:items-start'>
+        <Reservasi />
+        <Pengajuan />
+      </div>
     </>
   )
 }

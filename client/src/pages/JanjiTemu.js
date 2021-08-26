@@ -39,36 +39,37 @@ const JanjiTemu = ({
   return (
     <>
      <Navbar backButton={true} />
-      <div className="max-w-md py-1 bg-white shadow-lg rounded-lg mx-5 my-4">
-        <h4 className='mt-3 mb-3 text-2xl text-center'>Daftar Janji Temu</h4>
-      </div>
-      { janjiLoading ?
-      <div className="max-w-md pt-4 pb-6 px-2 bg-white shadow-lg rounded-lg mx-5 mt-3">
-        <div className='text-center pt-4 pb-8 '> 
-          <BeatLoader color='#EC4899' loading={janjiLoading} size={15} />
+     <div className='min-w-screen flex flex-col items-center justify-center'>
+        <div className="max-w-md py-1 bg-white shadow-lg rounded-lg mx-5 my-4 w-full">
+          <h4 className='mt-3 mb-3 text-xl text-center lg:text-2xl'>Daftar Janji Temu</h4>
         </div>
-      </div> :
-        Object.keys(janji).map(service => {
-          return (
-            janji[service].map((item, i) => {
-              return (
-                !item.tanggal_reservasi 
-                ? 
-                <div key={i} className="max-w-md pt-4 pb-4 px-2 bg-white shadow-lg rounded-lg mx-5 mt-3">
-                  {view(service, item)}
-                </div> 
-                :
-                compareDate(date(item.tanggal_reservasi)) ? 
-                <div key={i} className="max-w-md pt-4 pb-4 px-2 bg-white shadow-lg rounded-lg mx-5 mt-3">
-                  {view(service, item)}
-                </div> 
-                : ''       
-              )
-            })
-          )
-        })
-        }
-       
+        { janjiLoading ?
+        <div className="max-w-md pt-4 pb-6 px-2 bg-white shadow-lg rounded-lg mx-5 mt-3 w-full">
+          <div className='text-center pt-4 pb-8 '> 
+            <BeatLoader color='#EC4899' loading={janjiLoading} size={15} />
+          </div>
+        </div> :
+          Object.keys(janji).map(service => {
+            return (
+              janji[service].map((item, i) => {
+                return (
+                  !item.tanggal_reservasi 
+                  ? 
+                  <div key={i} className="max-w-md pt-4 pb-4 px-2 bg-white shadow-lg rounded-lg mx-5 mt-3 w-full">
+                    {view(service, item)}
+                  </div> 
+                  :
+                  compareDate(date(item.tanggal_reservasi)) ? 
+                  <div key={i} className="max-w-md pt-4 pb-4 px-2 bg-white shadow-lg rounded-lg mx-5 mt-3 w-full">
+                    {view(service, item)}
+                  </div> 
+                  : ''       
+                )
+              })
+            )
+          })
+          }
+      </div> 
     </>
   )
 }

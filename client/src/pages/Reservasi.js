@@ -33,7 +33,7 @@ const Reservasi = ({
 
   return (
     <>
-      <div className="max-w-md bg-white shadow-lg rounded-lg mx-2 my-4">
+      <div className="max-w-md bg-white shadow-lg rounded-lg mx-2 my-4 w-full">
         <div className='bg-pink-400 py-2 rounded-t-lg text-2xl text-center mb-3'>
           <h4 className=''>Reservasi Hari Ini</h4>
         </div>
